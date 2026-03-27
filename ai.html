@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>AI Assistant — Aayuki Export</title>
+<link rel="stylesheet" href="style.css"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet"/>
+<style>
+/* Full-height chat layout */
+.ai-wrap {
+  padding-top: 72px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg2);
+}
+.ai-layout {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  overflow: hidden;
+}
+
+/* ── Sidebar ── */
+.ai-sidebar {
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+.sb-top {
+  padding: 28px 24px 20px;
+  border-bottom: 1px solid var(--border);
+}
+.ai-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.ai-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--indigo), var(--indigo2));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  box-shadow: var(--sh-indigo);
+  position: relative;
+  flex-shrink: 0;
+}
+.online-dot {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--green);
+  border: 2px solid var(--surface);
+}
+.ai-brand-name { font-size: .92rem; font-weight: 700; color: var(--text); }
+.ai-brand-sub  { font-family: var(--fm); font-size: .54rem; letter-spacing: 1.5px; color: var(--green); margin-top: 2px; }
+.powered-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 100px;
+  background: rgba(79,70,229,.07);
+  border: 1px solid rgba(79,70,229,.15);
+  font-family: var(--fm);
+  font-size: .56rem;
+  letter-spacing: 1.5px;
+  color: var(--indigo);
+  text-transform: uppercase;
+}
+.sb-section { padding: 20px 20px 0; }
+.sb-label {
+  font-family: var(--fm);
+  font-size: .56rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted2);
+  margin-bottom: 12px;
+  padding: 0 4px;
+}
+.cap-item {
+  display: flex;
+  gap: 11px;
+  align-items: flex-start;
+  padding: 11px 12px;
+  border-radius: 10px;
+  margin-bottom: 7px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  transition: border-color .2s, box-shadow .2s;
+}
+.cap-item:hover { border-color: rgba(79,70,229,.2); box-shadow: var(--sh-sm); }
+.cap-icon {
+  width: 30px; height: 30px;
+  border-radius: 8px;
+  background: rgba(79,70,229,.09);
+  display: flex; align-items: center; justify-content: center;
+  font-size: .85rem;
+  flex-shrink: 0;
+}
+.cap-text { font-size: .78rem; color: var(--muted); line-height: 1.5; }
+.cap-text strong { color: var(--text); display: block; margin-bottom: 1px; font-size: .8rem; }
+
+.topic-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 13px;
+  border-radius: 9px;
+  border: 1px solid var(--border);
+  background: var(--bg2);
+  color: var(--text2);
+  font-size: .8rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+  margin-bottom: 7px;
+  transition: all .2s var(--ease);
+  font-family: var(--f);
+}
+.topic-btn:hover { border-color: var(--indigo); color: var(--indigo); background: rgba(79,70,229,.04); }
+.topic-btn i { color: var(--indigo); font-size: .85rem; flex-shrink: 0; }
+
+.sb-contact {
+  padding: 20px;
+  margin-top: auto;
+  border-top: 1px solid var(--border);
+}
+.sb-contact p { font-size: .78rem; color: var(--muted); line-height: 1.7; }
+.sb-contact a { color: var(--indigo); }
+
+/* ── Main chat ── */
+.ai-main {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.chat-header {
+  padding: 18px 28px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  box-shadow: 0 1px 0 var(--border);
+}
+.ch-left { display: flex; align-items: center; gap: 12px; }
+.ch-title { font-size: .9rem; font-weight: 700; color: var(--text); }
+.ch-sub { font-family: var(--fm); font-size: .55rem; letter-spacing: 1.5px; color: var(--muted2); margin-top: 2px; }
+.clear-btn {
+  font-family: var(--fm);
+  font-size: .58rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: transparent;
+  border: 1px solid var(--border2);
+  padding: 6px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all .2s;
+}
+.clear-btn:hover { border-color: var(--indigo); color: var(--indigo); }
+
+/* Welcome card */
+.welcome-card {
+  margin: 24px 28px;
+  background: linear-gradient(135deg, rgba(79,70,229,.06), rgba(13,148,136,.04));
+  border: 1px solid rgba(79,70,229,.14);
+  border-radius: 16px;
+  padding: 24px 28px;
+}
+.wc-title { font-size: .97rem; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+.wc-body { font-size: .85rem; color: var(--muted); line-height: 1.75; margin-bottom: 18px; }
+.wc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.wc-btn {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: 10px;
+  padding: 11px 14px;
+  cursor: pointer;
+  text-align: left;
+  transition: all .2s var(--ease);
+  font-family: var(--f);
+}
+.wc-btn:hover { border-color: var(--indigo); box-shadow: var(--sh-sm); background: rgba(79,70,229,.02); }
+.wc-btn-title { font-size: .82rem; font-weight: 600; color: var(--text); margin-bottom: 3px; }
+.wc-btn-sub { font-family: var(--fm); font-size: .55rem; letter-spacing: 1px; color: var(--indigo); }
+
+/* Messages */
+.messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 28px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border2) transparent;
+}
+.msg { max-width: 78%; display: flex; flex-direction: column; gap: 4px; }
+.msg.ai  { align-self: flex-start; }
+.msg.user { align-self: flex-end; }
+.msg-bub {
+  padding: 12px 16px;
+  border-radius: 14px;
+  font-size: .875rem;
+  line-height: 1.72;
+}
+.msg.ai .msg-bub {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 4px 14px 14px 14px;
+  color: var(--text2);
+  box-shadow: var(--sh-sm);
+}
+.msg.user .msg-bub {
+  background: var(--indigo);
+  color: #fff;
+  border-radius: 14px 14px 4px 14px;
+}
+.msg-time {
+  font-family: var(--fm);
+  font-size: .52rem;
+  letter-spacing: 1px;
+  color: var(--muted2);
+}
+.msg.user .msg-time { text-align: right; }
+
+/* Input area */
+.input-area {
+  flex-shrink: 0;
+  padding: 14px 28px 18px;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+}
+.quick-bar {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+.qb {
+  font-family: var(--fm);
+  font-size: .56rem;
+  letter-spacing: 1px;
+  padding: 5px 11px;
+  border-radius: 100px;
+  border: 1px solid var(--border2);
+  background: var(--bg2);
+  color: var(--muted);
+  cursor: pointer;
+  transition: all .2s;
+}
+.qb:hover { border-color: var(--indigo); color: var(--indigo); background: rgba(79,70,229,.05); }
+.input-row { display: flex; gap: 10px; align-items: flex-end; }
+.ai-inp {
+  flex: 1;
+  background: var(--bg2);
+  border: 1.5px solid var(--border2);
+  border-radius: 10px;
+  color: var(--text);
+  font-family: var(--f);
+  font-size: .875rem;
+  padding: 11px 14px;
+  outline: none;
+  resize: none;
+  max-height: 120px;
+  transition: border-color .25s, box-shadow .25s, background .25s;
+  line-height: 1.6;
+}
+.ai-inp::placeholder { color: var(--muted2); }
+.ai-inp:focus { border-color: var(--indigo); box-shadow: 0 0 0 3px rgba(79,70,229,.07); background: var(--surface); }
+.send-btn {
+  width: 42px; height: 42px;
+  border-radius: 10px;
+  background: var(--indigo);
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: .95rem;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: var(--sh-indigo);
+  transition: all .2s var(--ease);
+  flex-shrink: 0;
+}
+.send-btn:hover { background: var(--indigo2); box-shadow: 0 8px 24px rgba(79,70,229,.3); transform: translateY(-1px); }
+.send-btn:disabled { opacity: .5; transform: none; box-shadow: none; }
+.inp-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
+}
+.inp-footer span { font-family: var(--fm); font-size: .53rem; letter-spacing: 1px; color: var(--muted2); }
+
+@media(max-width:900px){
+  .ai-layout { grid-template-columns: 1fr; }
+  .ai-sidebar { display: none; }
+}
+</style>
+</head>
+<body>
+<div id="prog"></div><div id="cur"></div><div id="curl"></div>
+
+<!-- SCROLL TO TOP BUTTON -->
+<button id="scrollTop" aria-label="Scroll to top">
+  <i class="bi bi-arrow-up"></i>
+</button>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="logo/AAYUKI.jpg" alt="Aayuki Logo" class="nav-logo-img" />
+      <div class="nav-logo-name">Aayuki<span> </span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="reviews.html">Reviews</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="ai.html" class="nav-cta">AI Assistant</a></li>
+    </ul>
+    <div class="ham" id="ham"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+<div class="mob" id="mob">
+  <span class="mob-close" id="mob-close"><i class="bi bi-x-lg"></i></span>
+  <a href="index.html">Home</a><a href="about.html">About</a><a href="products.html">Products</a>
+  <a href="gallery.html">Gallery</a><a href="reviews.html">Reviews</a>
+  <a href="contact.html">Contact</a><a href="ai.html">AI Assistant</a>
+</div>
+
+<div class="ai-wrap">
+  <div class="ai-layout">
+
+    <!-- SIDEBAR -->
+    <div class="ai-sidebar">
+      <div class="sb-top">
+        <div class="ai-brand">
+          <div class="ai-avatar">🤖<div class="online-dot"></div></div>
+          <div>
+            <div class="ai-brand-name">Aayuki AI Assistant</div>
+            <div class="ai-brand-sub">● Online · Ready to help</div>
+          </div>
+        </div>
+        <div class="powered-tag"><i class="bi bi-stars"></i>Instant Knowledge Base</div>
+      </div>
+
+      <div class="sb-section" style="padding-top:22px;">
+        <div class="sb-label">What I can do</div>
+        <div class="cap-item"><div class="cap-icon">🔍</div><div class="cap-text"><strong>Product Lookup</strong>Specs, weights, standards, sizes — full catalogue knowledge.</div></div>
+        <div class="cap-item"><div class="cap-icon">✨</div><div class="cap-text"><strong>Smart Recommendations</strong>Describe your project, get tailored product suggestions.</div></div>
+        <div class="cap-item"><div class="cap-icon">📋</div><div class="cap-text"><strong>Standards & Compliance</strong>BS EN, ISO, SN4 — explained clearly for your market.</div></div>
+        <div class="cap-item"><div class="cap-icon">📦</div><div class="cap-text"><strong>Packaging & Quantities</strong>Carton quantities, pcs per packet, weights per carton.</div></div>
+        <div class="cap-item"><div class="cap-icon">💬</div><div class="cap-text"><strong>Quote Routing</strong>Direct you to the right contact or quote form instantly.</div></div>
+      </div>
+
+      <div class="sb-section" style="padding:20px 20px 0;">
+        <div class="sb-label">Quick Topics</div>
+        <button class="topic-btn" onclick="quickAsk('What SWR fittings do you carry and what are their weights?')"><i class="bi bi-arrow-right-short"></i>SWR Series Overview</button>
+        <button class="topic-btn" onclick="quickAsk('Compare the 32mm and 40mm PP fittings range — specs and carton quantities')"><i class="bi bi-arrow-right-short"></i>PP Fittings Comparison</button>
+        <button class="topic-btn" onclick="quickAsk('Tell me about your floor trap finishes, sizes and dimensions')"><i class="bi bi-arrow-right-short"></i>Floor Trap Finishes</button>
+        <button class="topic-btn" onclick="quickAsk('What waste pipe adapters are available and what sizes do they connect?')"><i class="bi bi-arrow-right-short"></i>Waste Pipe Adapters</button>
+        <button class="topic-btn" onclick="quickAsk('What international standards do your products comply with?')"><i class="bi bi-arrow-right-short"></i>Standards & Compliance</button>
+        <button class="topic-btn" onclick="quickAsk('How do I place an order with Aayuki Export? What is the process?')"><i class="bi bi-arrow-right-short"></i>Ordering Process</button>
+      </div>
+
+      <div class="sb-contact">
+        <div class="sb-label" style="color:#000;">Direct Contact</div>
+        <p>
+          <a href="tel:+919825045496"><i class="bi bi-telephone"></i> +91 98250 45496</a><br>
+          <a href="mailto:info@duraexport.uk" style="color:blue;">info@duraexport.uk</a><br>
+          <a href="mailto:anand@duraexport.uk" style="color:blue;">anand@duraexport.uk</a>
+        </p>
+        <a href="contact.html" class="btn btn-p" style="width:100%;justify-content:center;margin-top:14px;padding:10px;font-size:.78rem;color:#fff;">
+          <i class="bi bi-send" style="color:#fff;"></i> Request a Quote
+        </a>
+      </div>
+    </div>
+
+    <!-- MAIN CHAT -->
+    <div class="ai-main">
+      <div class="chat-header">
+        <div class="ch-left">
+          <div class="ai-avatar" style="width:38px;height:38px;font-size:1.1rem;">🤖<div class="online-dot"></div></div>
+          <div>
+            <div class="ch-title">Aayuki Product Intelligence</div>
+            <div class="ch-sub">Full catalogue knowledge · Instant answers</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:center;">
+          <a href="products.html" class="btn btn-g" style="padding:7px 16px;font-size:.75rem;"><i class="bi bi-grid-3x3-gap-fill"></i> Products</a>
+          <button class="clear-btn" onclick="clearChat()"><i class="bi bi-trash"></i> Clear</button>
+        </div>
+      </div>
+
+      <!-- Welcome -->
+      <div class="welcome-card" id="welcome">
+        <div class="wc-title">👋 Welcome to Aayuki's AI Product Assistant</div>
+        <div class="wc-body">I have complete knowledge of every product in our catalogue — specifications, weights, standards, carton quantities and more. What can I help you find today?</div>
+        <div class="wc-grid">
+          <button class="wc-btn" onclick="quickAsk('What SWR fittings are available in 110mm? List all with weights.')"><div class="wc-btn-title">SWR Fittings Range</div><div class="wc-btn-sub">→ All 110 MM products</div></button>
+          <button class="wc-btn" onclick="quickAsk('Tell me about the PVD floor trap options — finishes, sizes, dimensions')"><div class="wc-btn-title">Floor Trap Options</div><div class="wc-btn-sub">→ PVD finishes & sizes</div></button>
+          <button class="wc-btn" onclick="quickAsk('List all PP fittings in 40mm with weights and carton quantities')"><div class="wc-btn-title">PP 40 MM Specs</div><div class="wc-btn-sub">→ Weights & carton qty</div></button>
+          <button class="wc-btn" onclick="quickAsk('I need bathroom drain gratings for a luxury hotel renovation — what would you recommend?')"><div class="wc-btn-title">Get a Recommendation</div><div class="wc-btn-sub">→ Describe your project</div></button>
+        </div>
+      </div>
+
+      <div class="messages" id="messages"></div>
+
+      <div class="input-area">
+        <div class="quick-bar">
+          <button class="qb" onclick="quickAsk('List all SWR Series products with weights')">SWR weights</button>
+          <button class="qb" onclick="quickAsk('What PP fitting colours are available?')">PP colours</button>
+          <button class="qb" onclick="quickAsk('What are the floor trap finishes and dimensions?')">Floor trap specs</button>
+          <button class="qb" onclick="quickAsk('What does SN4 stiffness class mean?')">SN4 explained</button>
+          <button class="qb" onclick="quickAsk('How do I contact Aayuki for a quote?')">Get a quote</button>
+        </div>
+        <div class="input-row">
+          <textarea class="ai-inp" id="ai-inp" placeholder="Ask anything about our products — specs, standards, sizes, recommendations…" rows="1"
+            onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
+          <button class="send-btn" id="send-btn" onclick="sendMsg()"><i class="bi bi-send-fill"></i></button>
+        </div>
+        <div class="inp-footer">
+          <span>Press Enter to send · Shift+Enter for new line</span>
+          <span>Instant Knowledge Base</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="shared.js"></script>
+<script>
+initAll('ai.html');
+
+// Complete product knowledge base
+const KNOWLEDGE = {
+  company: {
+    name: "Aayuki Export",
+    address: "Plot No. 14, Survey No. 149, Vavdi Industrial Area, Rajkot – 360004, Gujarat, India",
+    phone: "+91 98250 45496",
+    email: ["info@duraexport.uk", "anand@duraexport.uk"],
+    experience: "25+ years",
+    countries: "30+"
+  },
+  products: {
+    swr: [
+      "Tee — BS4514/BS4660/ISO3633/EN1329 — 611g",
+      "T/S Tee — 45° Branch SN4 / BS EN 1329-1 BD — 660g",
+      "40° Yee — 45° Branch / BS EN 1329-1 BD — 927g",
+      "D/S Yee — 45° Branch SN4 / BS EN 1329-1 BD — 810g",
+      "SS/Access Pipe — BS4514/BS4660 — 638g",
+      "D/S Access Pipe — Pipe SN4 / BS EN 1329-1 BD — 740g",
+      "90° Elbow — SN4 BS EN 1329-1 BD — 580g",
+      "W/Access Bend — Branch SN4 / BS EN 1329-1 BD — 753g",
+      "S/S Elbow W/Access — BS4514/BS4660/ISO3633/EN1329 — 682g",
+      "S/B Elbow — Pipe SN4 / BS EN 1329-1 BD — 508g",
+      "D/S Coupler — SN4 — 300g",
+      "D/S 45° Elbow — SN4 / BS EN 1329-1 BD — 368g",
+      "S/S 45° Elbow — BS4514/EN1329 — 360g",
+      "Access Cap Cover — 28g",
+      "110MM Access Cap — 101g"
+    ],
+    pp32: "Elbow SS 30g/40ctn | Elbow DS 36g/34ctn | Coupler 25g/54ctn | Tee 55g/16ctn | Reducer 32-40MM 18g/70ctn | End Cap 5g/182ctn | 45° Elbow 40g/26ctn",
+    pp40: "Elbow DS 48g/24ctn | Elbow SS 39g/27ctn | Coupler 33g/39ctn | Tee 72g/12ctn | End Cap 6g/106ctn",
+    floorTraps: {
+      square: "91mm hole | 130×130mm top | 150×150mm base | 360g",
+      linear: "1ft to 4ft | 800g–2750g (includes 150g drain cap)",
+      finishes: ["Matt", "Glossy", "PVD Gold", "PVD Rose", "PVD Black"]
+    },
+    wasteAdapters: [
+      "110×32MM — 139g, 90/ctn",
+      "110×40MM — 143g, 90/ctn",
+      "110×32×32MM — 173g, 70/ctn",
+      "110×32×40MM — 174g, 70/ctn",
+      "110×40×40MM DS — 179g, 70/ctn"
+    ],
+    pushfit: "15MM — 2g, 50pcs/pkt, 180pkt/ctn | 22MM — 5g, 25pcs/pkt, 160pkt/ctn",
+    pvcPipes: "15MM 700g | 20MM 950g | 25MM 1450g | 32MM 1950g | 40MM 2350g | 50MM 3000g",
+    showerPlates: "MS Shower Plate: Chrome, 400g | MS Douche Plate: 4MM, Chrome, 300g | Big S/S Plate: 4MM, Chrome & Black | Small S/S Duche Plate: 4MM, Chrome & Black"
+  }
+};
+
+let history = [];
+
+function addMsg(role, text) {
+  const msgs = document.getElementById('messages');
+  const d = document.createElement('div');
+  d.className = `msg ${role}`;
+  const now = new Date().toLocaleTimeString('en-US', {hour:'2-digit', minute:'2-digit'});
+  const formatted = text
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\n\n/g, '<br><br>')
+    .replace(/\n/g, '<br>');
+  d.innerHTML = `<div class="msg-bub">${formatted}</div><div class="msg-time">${now}</div>`;
+  msgs.appendChild(d);
+  msgs.scrollTo({top: msgs.scrollHeight, behavior: 'smooth'});
+}
+
+function generateResponse(question) {
+  const q = question.toLowerCase();
+  
+  // SWR queries
+  if (q.includes('swr') || q.includes('110')) {
+    return `**📦 SWR SERIES (PVC-U, 110 MM)**\n\n${KNOWLEDGE.products.swr.map((p, i) => `${i+1}. ${p}`).join('\n')}\n\nAll products comply with BS4514/BS4660/ISO3633/EN1329 standards.\n\nNeed more details? Contact us at **${KNOWLEDGE.company.phone}**`;
+  }
+  
+  // PP Fittings
+  if (q.includes('pp') || q.includes('fitting')) {
+    return `**🔧 PP FITTINGS (PPCP, Black/White/Grey, 10pcs/packet)**\n\n**32 MM:**\n${KNOWLEDGE.products.pp32}\n\n**40 MM:**\n${KNOWLEDGE.products.pp40}\n\nAvailable in Black, White, and Grey colors.\n\nFor bulk orders: **${KNOWLEDGE.company.email[0]}**`;
+  }
+  
+  // Floor Traps
+  if (q.includes('floor') || q.includes('trap') || q.includes('drain') || q.includes('pvd')) {
+    return `**🚿 FLOOR TRAPS**\n\n**Square:** ${KNOWLEDGE.products.floorTraps.square}\n**Linear:** ${KNOWLEDGE.products.floorTraps.linear}\n\n**Finishes Available:**\n${KNOWLEDGE.products.floorTraps.finishes.map(f => `• ${f}`).join('\n')}\n\nPerfect for luxury bathrooms and commercial projects!`;
+  }
+  
+  // Waste Adapters
+  if (q.includes('waste') || q.includes('adapter')) {
+    return `**🔌 WASTE ADAPTERS (PVC, Black/Brown)**\n\n${KNOWLEDGE.products.wasteAdapters.join('\n')}\n\nCompatible with standard plumbing systems.`;
+  }
+  
+  // Standards
+  if (q.includes('standard') || q.includes('sn4') || q.includes('compliance')) {
+    return `**✅ STANDARDS & COMPLIANCE**\n\nOur products comply with:\n• BS EN 1329-1 BD\n• BS4514/BS4660\n• ISO3633\n• SN4 Stiffness Class\n\n**SN4** = Stiffness Class 4, suitable for underground drainage and high-load applications.\n\nAll products are tested and certified for international markets.`;
+  }
+  
+  // Quote/Contact
+  if (q.includes('quote') || q.includes('order') || q.includes('price') || q.includes('contact')) {
+    return `**📞 GET A QUOTE**\n\nContact us directly:\n\n**📧 Email:**\n• ${KNOWLEDGE.company.email[0]}\n• ${KNOWLEDGE.company.email[1]}\n\n**📱 Phone:** ${KNOWLEDGE.company.phone}\n\n**🏢 Address:**\n${KNOWLEDGE.company.address}\n\nOr visit our Contact page to submit a quote request form!`;
+  }
+  
+  // Company info
+  if (q.includes('about') || q.includes('company') || q.includes('aayuki')) {
+    return `**🏭 ABOUT AAYUKI EXPORT**\n\n${KNOWLEDGE.company.name} (formerly Dura Export)\n📍 ${KNOWLEDGE.company.address}\n\n✨ ${KNOWLEDGE.company.experience} of manufacturing excellence\n🌍 Exporting to ${KNOWLEDGE.company.countries} countries\n📦 50+ SKUs in our catalogue\n\nWe specialize in premium plumbing fittings for residential and commercial projects worldwide.`;
+  }
+  
+  // PVC Pipes
+  if (q.includes('pvc') || q.includes('pipe')) {
+    return `**🔵 PVC PIPES (White, 3M)**\n\n${KNOWLEDGE.products.pvcPipes}\n\nHigh-quality PVC pipes for various plumbing applications.`;
+  }
+  
+  // Shower Plates
+  if (q.includes('shower') || q.includes('plate') || q.includes('douche')) {
+    return `**🚿 SHOWER PLATES**\n\n${KNOWLEDGE.products.showerPlates}\n\nBrand: Tiler's Choice (or without brand for private label)\n\nAvailable branded or unbranded for your business needs.`;
+  }
+  
+  // Pushfit
+  if (q.includes('pushfit') || q.includes('push fit')) {
+    return `**🔗 PUSHFIT (PP, Black/Brown body, Black/Blue O-Ring)**\n\n${KNOWLEDGE.products.pushfit}\n\nEasy-to-install push-fit connections for quick plumbing installations.`;
+  }
+  
+  // Recommendation
+  if (q.includes('recommend') || q.includes('suggest') || q.includes('hotel') || q.includes('project') || q.includes('luxury')) {
+    return `**✨ PRODUCT RECOMMENDATIONS**\n\nFor luxury hotels and commercial projects, I recommend:\n\n**Floor Traps:**\n• PVD Gold or PVD Rose finish for premium aesthetics\n• Linear traps (2ft-4ft) for modern shower areas\n• Square traps with PVD finishes for traditional bathrooms\n\n**Drainage Systems:**\n• SWR Series 110MM for main drainage lines\n• Waste adapters for connecting fixtures\n\nWould you like specific specs for any of these products?\n\nFor a detailed quote: **${KNOWLEDGE.company.phone}**`;
+  }
+  
+  // Default response
+  return `I can help you with:\n\n• **SWR Series** products (110 MM PVC-U)\n• **PP Fittings** (32MM & 40MM)\n• **Floor Traps** (Square & Linear)\n• **Waste Adapters**\n• **PVC Pipes & Pushfit**\n• **Shower Plates**\n• **Standards & Compliance**\n• **Quotes & Orders**\n\nWhat would you like to know more about?\n\nFor immediate assistance: **${KNOWLEDGE.company.phone}**`;
+}
+
+function sendMsg() {
+  const inp = document.getElementById('ai-inp');
+  const msg = inp.value.trim();
+  if (!msg) return;
+  inp.value = '';
+  inp.style.height = 'auto';
+
+  const welcome = document.getElementById('welcome');
+  if (welcome) welcome.style.display = 'none';
+
+  addMsg('user', msg);
+  
+  const btn = document.getElementById('send-btn');
+  btn.disabled = true;
+  
+  setTimeout(() => {
+    const reply = generateResponse(msg);
+    addMsg('ai', reply);
+    btn.disabled = false;
+  }, 300);
+}
+
+function quickAsk(q) {
+  document.getElementById('ai-inp').value = q;
+  sendMsg();
+}
+
+function clearChat() {
+  history = [];
+  document.getElementById('messages').innerHTML = '';
+  const welcome = document.getElementById('welcome');
+  if (welcome) welcome.style.display = 'block';
+}
+
+function handleKey(e) {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMsg(); }
+}
+
+function autoResize(el) {
+  el.style.height = 'auto';
+  el.style.height = Math.min(el.scrollHeight, 120) + 'px';
+}
+</script>
+</body>
+</html>

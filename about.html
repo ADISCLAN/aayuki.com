@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>About Us — Aayuki Export</title>
+<link rel="stylesheet" href="style.css"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet"/>
+<style>
+/* STORY */
+.story-split{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;}
+.story-visual{background:linear-gradient(145deg,var(--indigo),var(--indigo2));border-radius:20px;padding:56px 48px;position:relative;overflow:hidden;box-shadow:var(--sh-xl);}
+.story-visual::before{content:'25+';position:absolute;bottom:-30px;right:-20px;font-family:var(--fp);font-size:12rem;font-weight:700;color:rgba(255,255,255,.07);line-height:1;pointer-events:none;}
+.sv-year{font-family:var(--fp);font-size:5rem;font-weight:700;color:#fff;line-height:1;}
+.sv-label{font-family:var(--fm);font-size:.62rem;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,.55);margin-top:6px;}
+.sv-desc{font-size:.9rem;color:rgba(255,255,255,.7);line-height:1.8;margin:24px 0;}
+.sv-stats{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:28px;}
+.sv-stat{background:rgba(255,255,255,.1);border-radius:12px;padding:18px;}
+.sv-stat-num{font-size:1.8rem;font-weight:700;color:#fff;line-height:1;}
+.sv-stat-num .u{font-size:.9rem;color:rgba(255,255,255,.6);}
+.sv-stat-lbl{font-family:var(--fm);font-size:.54rem;letter-spacing:2px;color:rgba(255,255,255,.5);text-transform:uppercase;margin-top:4px;}
+.cert-wrap{margin-top:28px;display:flex;flex-wrap:wrap;gap:7px;}
+.cert-pill{display:inline-flex;align-items:center;gap:5px;border:1px solid rgba(79,70,229,.2);padding:5px 12px;border-radius:6px;font-family:var(--fm);font-size:.58rem;letter-spacing:1.5px;color:var(--indigo);background:rgba(79,70,229,.05);cursor:none;transition:border-color .2s,background .2s;}
+.cert-pill:hover{border-color:rgba(79,70,229,.4);background:rgba(79,70,229,.1);}
+.cert-pill i{font-size:.7rem;}
+
+/* VISION MISSION CARDS */
+.vm-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:56px;}
+.vm-card{border-radius:20px;padding:48px 44px;position:relative;overflow:hidden;}
+.vm-vision{background:linear-gradient(145deg,#f0f0ff,#e8e8ff);border:1px solid rgba(79,70,229,.15);}
+.vm-mission{background:linear-gradient(145deg,#f0fdfa,#ccfbf1);border:1px solid rgba(13,148,136,.15);}
+.vm-icon{width:80px;height:80px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:22px;}
+.vmi-v{background:rgba(79,70,229,.12);}
+.vmi-m{background:rgba(13,148,136,.12);}
+.vm-title{font-family:var(--fp);font-size:1.6rem;font-weight:700;margin-bottom:14px;letter-spacing:-.3px;}
+.vm-v .vm-title{color:var(--indigo);}
+.vm-m .vm-title{color:var(--teal);}
+.vm-body{font-size:.93rem;color:var(--text2);line-height:1.85;}
+.vm-points{margin-top:18px;display:flex;flex-direction:column;gap:10px;}
+.vm-pt{display:flex;align-items:flex-start;gap:10px;font-size:.87rem;color:var(--text2);}
+.vm-pt-icon{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.65rem;flex-shrink:0;margin-top:2px;}
+.vp-v{background:rgba(79,70,229,.12);color:var(--indigo);}
+.vp-m{background:rgba(13,148,136,.12);color:var(--teal);}
+
+/* VALUES */
+.values-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+.val-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:36px 28px;text-align:center;box-shadow:var(--sh-sm);transition:all .35s var(--ease);cursor:default;}
+.val-card:hover{box-shadow:var(--sh-lg);transform:translateY(-4px);border-color:rgba(79,70,229,.14);}
+.val-icon{width:90px;height:90px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;margin:0 auto 18px;}
+.val-icon img{animation:breathe 3s ease-in-out infinite;}
+@keyframes breathe{0%,100%{transform:scale(1);}50%{transform:scale(1.1);}}
+.val-title{font-size:.95rem;font-weight:700;margin-bottom:8px;color:var(--text);}
+.val-body{font-size:.83rem;color:var(--muted);line-height:1.75;}
+
+/* TIMELINE */
+.tl{position:relative;padding-left:32px;}
+.tl::before{content:'';position:absolute;left:8px;top:4px;bottom:0;width:1.5px;background:linear-gradient(to bottom,var(--indigo),var(--teal),transparent);}
+.tl-item{position:relative;margin-bottom:36px;}
+.tl-item::before{content:'';position:absolute;left:-27px;top:5px;width:11px;height:11px;border-radius:50%;background:var(--indigo);box-shadow:0 0 0 3px rgba(79,70,229,.15);}
+.tl-year{font-family:var(--fm);font-size:.6rem;letter-spacing:3px;color:var(--indigo);margin-bottom:5px;}
+.tl-title{font-size:.97rem;font-weight:700;margin-bottom:5px;color:var(--text);}
+.tl-desc{font-size:.84rem;color:var(--muted);line-height:1.7;}
+
+/* PROCESS STEPS */
+.process{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;}
+.process::before{content:'';position:absolute;top:28px;left:12.5%;right:12.5%;height:1.5px;background:linear-gradient(90deg,var(--indigo),var(--teal));z-index:0;}
+.pstep{text-align:center;padding:0 20px;position:relative;z-index:1;}
+.pstep-circle{width:56px;height:56px;border-radius:50%;background:var(--indigo);color:#fff;font-weight:700;font-size:1rem;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;box-shadow:var(--sh-indigo);}
+.pstep-title{font-size:.93rem;font-weight:700;margin-bottom:6px;color:var(--text);}
+.pstep-desc{font-size:.82rem;color:var(--muted);line-height:1.7;}
+
+/* TEAM */
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.team-card{background:var(--card);border:2px solid #2d2d2d;border-radius:16px;padding:36px 28px;text-align:center;box-shadow:var(--sh-sm);transition:all .35s var(--ease);}
+.team-card:hover{box-shadow:var(--sh-lg);transform:translateY(-8px);border-color:#111;}
+.team-av{width:120px;height:120px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.8rem;margin:0 auto 18px;animation:float 3s ease-in-out infinite;}
+.team-av img{width:100%;height:100%;object-fit:contain;}
+@keyframes float{0%,100%{transform:translateY(0px);}50%{transform:translateY(-10px);}}
+.team-name{font-size:.97rem;font-weight:700;margin-bottom:4px;color:var(--text);}
+.team-role{font-family:var(--fm);font-size:.57rem;letter-spacing:2px;color:var(--indigo);text-transform:uppercase;margin-bottom:11px;}
+.team-bio{font-size:.83rem;color:var(--muted);line-height:1.75;}
+
+/* Stat band */
+.stat-band{background:var(--indigo);padding:56px 0;}
+.stat-band-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;}
+.sbc{text-align:center;padding:0 24px;border-right:1px solid rgba(255,255,255,.1);}
+.sbc:last-child{border:none;}
+.sbc-num{font-family:var(--fp);font-size:3rem;font-weight:700;color:#fff;line-height:1;}
+.sbc-lbl{font-family:var(--fm);font-size:.58rem;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.55);margin-top:6px;}
+
+@media(max-width:960px){.story-split{grid-template-columns:1fr;}.vm-grid{grid-template-columns:1fr;}.values-grid{grid-template-columns:1fr 1fr;}.team-grid{grid-template-columns:1fr 1fr;}.process{grid-template-columns:1fr 1fr;gap:28px;}.process::before{display:none;}.stat-band-grid{grid-template-columns:1fr 1fr;gap:24px;}.sbc{border:none;}}
+@media(max-width:600px){.values-grid{grid-template-columns:1fr;}.team-grid{grid-template-columns:1fr;}.process{grid-template-columns:1fr;}.stat-band-grid{grid-template-columns:1fr 1fr;}}
+</style>
+</head>
+<body>
+<div id="prog"></div><div id="cur"></div><div id="curl"></div>
+
+<!-- SCROLL TO TOP BUTTON -->
+<button id="scrollTop" aria-label="Scroll to top">
+  <i class="bi bi-arrow-up"></i>
+</button>
+
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><img src="logo/AAYUKI.jpg" alt="Aayuki Logo" class="nav-logo-img" />
+        <div class="nav-logo-name">Aayuki<span> </span></div>
+    </a>
+    <ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="products.html">Products</a></li><li><a href="gallery.html">Gallery</a></li><li><a href="reviews.html">Reviews</a></li><li><a href="contact.html">Contact</a></li><li><a href="ai.html" class="nav-cta">AI Assistant</a></li></ul>
+    <div class="ham" id="ham"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+<div class="mob" id="mob"><span class="mob-close" id="mob-close"><i class="bi bi-x-lg"></i></span><a href="index.html">Home</a><a href="about.html">About</a><a href="products.html">Products</a><a href="gallery.html">Gallery</a><a href="reviews.html">Reviews</a><a href="contact.html">Contact</a><a href="ai.html">AI Assistant</a></div>
+
+<div class="page-hero">
+  <div class="ph-inner">
+    <div class="ph-eyebrow">About Aayuki</div>
+    <h1 class="ph-title">25 Years of <em>Precision,</em><br>Purpose &amp; <em>Partnership</em></h1>
+    <p class="ph-desc">Aayuki is not just a trading house; it's a bridge between high-precision Indian manufacturing and the global infrastructure demand.</p>
+  </div>
+</div>
+
+<!-- STORY -->
+<section class="sec sec-white">
+  <div class="wrap">
+    <div class="story-split">
+      <div class="rv-l">
+        <div class="story-visual">
+          <div class="sv-year">2000</div>
+          <div class="sv-label">Year Founded · Rajkot, India</div>
+          <p class="sv-desc">What started as a precision fittings workshop has grown into one of Rajkot's most trusted plumbing export houses. Our roots are in quality — and that will never change.</p>
+          <div class="sv-stats">
+            <div class="sv-stat"><div class="sv-stat-num"><span class="count" data-to="25" data-dur="2000">0</span><span class="u">+</span></div><div class="sv-stat-lbl">Years Active</div></div>
+            <div class="sv-stat"><div class="sv-stat-num"><span class="count" data-to="50" data-dur="1800">0</span><span class="u">+</span></div><div class="sv-stat-lbl">SKUs</div></div>
+            <div class="sv-stat"><div class="sv-stat-num"><span class="count" data-to="30" data-dur="1800">0</span><span class="u">+</span></div><div class="sv-stat-lbl">Countries</div></div>
+            <div class="sv-stat"><div class="sv-stat-num">6<span class="u">+</span></div><div class="sv-stat-lbl">Standards</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="rv-r">
+        <div class="eyebrow">Our Foundation</div>
+        <h2 class="stitle">Engineered for <em>Global</em> Markets</h2>
+        <div class="srule"></div>
+        <p style="font-size:.93rem;color:var(--muted);line-height:1.9;margin-bottom:18px;">Based in Rajkot's Vavdi Industrial Area — India's foremost precision manufacturing hub — Aayuki Export has built a reputation on three pillars: material quality, dimensional accuracy, and reliable supply chains.</p>
+        <p style="font-size:.93rem;color:var(--muted);line-height:1.9;margin-bottom:28px;">Every product in our range is manufactured to the exact specifications required by international markets. Our facility handles everything from raw material selection through to final QC inspection, carton packaging and export documentation.</p>
+        <div>
+          <p style="font-family:var(--fm);font-size:.58rem;letter-spacing:3px;color:var(--muted2);text-transform:uppercase;margin-bottom:12px;">Certifications &amp; Standards</p>
+          <div class="cert-wrap">
+            <span class="cert-pill"><i class="bi bi-patch-check-fill"></i>BS EN 1329-1</span>
+            <span class="cert-pill"><i class="bi bi-patch-check-fill"></i>BS4514</span>
+            <span class="cert-pill"><i class="bi bi-patch-check-fill"></i>BS4660</span>
+            <span class="cert-pill"><i class="bi bi-patch-check-fill"></i>ISO3633</span>
+            <span class="cert-pill"><i class="bi bi-patch-check-fill"></i>SN4</span>
+            <span class="cert-pill"><i class="bi bi-patch-check-fill"></i>EN1329</span>
+          </div>
+        </div>
+        <div style="margin-top:28px;display:flex;gap:12px;flex-wrap:wrap;">
+          <a href="products.html" class="btn btn-p"><i class="bi bi-grid-3x3-gap-fill"></i> View Products</a>
+          <a href="contact.html" class="btn btn-g"><i class="bi bi-send"></i> Get a Quote</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VISION & MISSION -->
+<section class="sec sec-alt">
+  <div class="wrap">
+    <div class="rv" style="text-align:center;max-width:560px;margin:0 auto;">
+      <div class="eyebrow" style="justify-content:center;">Our Direction</div>
+      <h2 class="stitle">Vision &amp; <em>Mission</em></h2>
+      <div class="srule" style="margin:14px auto 0;"></div>
+    </div>
+    <div class="vm-grid">
+      <!-- Vision -->
+      <div class="vm-card vm-vision rv-l">
+        <div class="vm-icon vmi-v"><img src="IMAGES/GALLERY/vision.png" alt="Vision" style="width:100%;height:100%;object-fit:contain;"></div>
+        <div class="vm-title" style="color:var(--indigo);">Our Vision</div>
+        <p class="vm-body">To become the world's most trusted name in precision-engineered plumbing fittings — setting the global benchmark for product quality, innovation and export reliability from India.</p>
+        <div class="vm-points">
+          <div class="vm-pt"><div class="vm-pt-icon vp-v"><i class="bi bi-check"></i></div><span>Lead global exports from Rajkot in the plumbing fittings sector</span></div>
+          <div class="vm-pt"><div class="vm-pt-icon vp-v"><i class="bi bi-check"></i></div><span>Be recognised as a synonym for precision quality across all 50+ markets</span></div>
+          <div class="vm-pt"><div class="vm-pt-icon vp-v"><i class="bi bi-check"></i></div><span>Build the most comprehensive single-source plumbing product range for exporters</span></div>
+          <div class="vm-pt"><div class="vm-pt-icon vp-v"><i class="bi bi-check"></i></div><span>Harness technology and AI to make sourcing effortless for our global clients</span></div>
+        </div>
+      </div>
+      <!-- Mission -->
+      <div class="vm-card vm-mission rv-r">
+        <div class="vm-icon vmi-m"><img src="IMAGES/GALLERY/mission.png" alt="Mission" style="width:100%;height:100%;object-fit:contain;"></div>
+        <div class="vm-title" style="color:var(--teal);">Our Mission</div>
+        <p class="vm-body">To deliver precision-manufactured plumbing fittings that meet the most demanding international standards — while providing the responsive, transparent export service our global clients rely on every day.</p>
+        <div class="vm-points">
+          <div class="vm-pt"><div class="vm-pt-icon vp-m"><i class="bi bi-check"></i></div><span>Manufacture every product to the exact tolerance and weight our clients specify</span></div>
+          <div class="vm-pt"><div class="vm-pt-icon vp-m"><i class="bi bi-check"></i></div><span>Respond to every enquiry within 24 hours with accurate pricing and availability</span></div>
+          <div class="vm-pt"><div class="vm-pt-icon vp-m"><i class="bi bi-check"></i></div><span>Continuously expand our certified product range to serve emerging global markets</span></div>
+          <div class="vm-pt"><div class="vm-pt-icon vp-m"><i class="bi bi-check"></i></div><span>Build lasting partnerships — not transactions — with every client worldwide</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STAT BAND -->
+<div class="stat-band rv">
+  <div class="wrap">
+    <div class="stat-band-grid">
+      <div class="sbc"><div class="sbc-num"><span class="count" data-to="25" data-dur="2000">0</span>+</div><div class="sbc-lbl">Years of Excellence</div></div>
+      <div class="sbc"><div class="sbc-num"><span class="count" data-to="50" data-dur="1800">0</span>+</div><div class="sbc-lbl">Product SKUs</div></div>
+      <div class="sbc"><div class="sbc-num"><span class="count" data-to="30" data-dur="1800">0</span>+</div><div class="sbc-lbl">Export Countries</div></div>
+      <div class="sbc"><div class="sbc-num">4.8★</div><div class="sbc-lbl">Client Rating</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- CORE VALUES -->
+<section class="sec sec-white">
+  <div class="wrap">
+    <div class="rv" style="text-align:center;max-width:520px;margin:0 auto 56px;">
+      <div class="eyebrow" style="justify-content:center;">What We Stand For</div>
+      <h2 class="stitle">Our Core <em>Values</em></h2>
+      <div class="srule" style="margin:14px auto 0;"></div>
+    </div>
+    <div class="values-grid">
+      <div class="val-card rv" style="transition-delay:.05s"><div class="val-icon wi-indigo"><img src="IMAGES/m&s/1.png" alt="Precision First" style="width:100%;height:100%;object-fit:contain;"></div><div class="val-title">Precision First</div><div class="val-body">Every millimetre matters. Our manufacturing tolerances are held to the strictest international standards on every batch, every time.</div></div>
+      <div class="val-card rv" style="transition-delay:.1s"><div class="val-icon wi-teal"><img src="IMAGES/m&s/2.png" alt="Partnership Mindset" style="width:100%;height:100%;object-fit:contain;"></div><div class="val-title">Partnership Mindset</div><div class="val-body">We build long-term relationships with importers, distributors and contractors — not just complete transactions.</div></div>
+      <div class="val-card rv" style="transition-delay:.15s"><div class="val-icon wi-gold"><img src="IMAGES/m&s/3.png" alt="Responsible Growth" style="width:100%;height:100%;object-fit:contain;"></div><div class="val-title">Responsible Growth</div><div class="val-body">Expanding our range and reach responsibly — never sacrificing the quality or standards that define our brand.</div></div>
+      <div class="val-card rv" style="transition-delay:.2s"><div class="val-icon wi-green"><img src="IMAGES/m&s/4.png" alt="Continuous Innovation" style="width:100%;height:100%;object-fit:contain;"></div><div class="val-title">Continuous Innovation</div><div class="val-body">From PVD finishing technology to AI-powered customer support — we invest in everything that makes your experience better.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="sec sec-alt">
+  <div class="wrap">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;">
+      <div class="rv-l">
+        <div class="eyebrow">Our Journey</div>
+        <h2 class="stitle">How We <em>Grew</em></h2>
+        <div class="srule"></div>
+        <p style="font-size:.93rem;color:var(--muted);line-height:1.9;margin-bottom:36px;">Every milestone is a testament to the trust our partners have placed in us — and our commitment to never stop improving.</p>
+        <div class="tl">
+          <div class="tl-item"><div class="tl-year">2000</div><div class="tl-title">Founded in Rajkot</div><div class="tl-desc">Established as a precision PVC fittings manufacturer in Vavdi Industrial Area with a focus on SWR drainage products.</div></div>
+          <div class="tl-item"><div class="tl-year">2005</div><div class="tl-title">First Export Contract</div><div class="tl-desc">Secured first international export contract supplying BS4514-compliant SWR fittings to the UK market.</div></div>
+          <div class="tl-item"><div class="tl-year">2010</div><div class="tl-title">PP Fittings Range Launch</div><div class="tl-desc">Expanded product range to include full PPCP PP fittings in 32 MM and 40 MM, tripling our catalogue.</div></div>
+          <div class="tl-item"><div class="tl-year">2015</div><div class="tl-title">Floor Trap &amp; Shower Products</div><div class="tl-desc">Launched premium floor trap range with PVD Gold, Rose and Black finishing technology — entering the luxury bathroom accessories market.</div></div>
+          <div class="tl-item"><div class="tl-year">2020</div><div class="tl-title">30+ Markets Milestone</div><div class="tl-desc">Reached the landmark of supplying to over 30 countries across Europe, Africa, Middle East and Asia.</div></div>
+          <div class="tl-item"><div class="tl-year">2024</div><div class="tl-title">AI-Powered Customer Experience</div><div class="tl-desc">Launched our Claude-powered AI product assistant, delivering instant, accurate answers to global customers 24/7.</div></div>
+        </div>
+      </div>
+      <div class="rv-r" style="padding-top:8px;">
+        <div class="eyebrow">Our Process</div>
+        <h2 class="stitle">How We <em>Work</em></h2>
+        <div class="srule"></div>
+        <p style="font-size:.93rem;color:var(--muted);line-height:1.9;margin-bottom:40px;">From enquiry to dispatch — a seamless, transparent process built on decades of export experience.</p>
+        <div style="display:flex;flex-direction:column;gap:20px;">
+          <div style="display:flex;gap:20px;align-items:flex-start;padding:24px;background:var(--card);border:1px solid var(--border);border-radius:14px;box-shadow:var(--sh-sm);transition:all .3s var(--ease);" onmouseenter="this.style.boxShadow='var(--sh-lg)';this.style.borderColor='rgba(79,70,229,.15)'" onmouseleave="this.style.boxShadow='var(--sh-sm)';this.style.borderColor='var(--border)'">
+            <div style="width:40px;height:40px;background:var(--indigo);border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:.9rem;flex-shrink:0;">01</div>
+            <div><div style="font-weight:700;margin-bottom:5px;">Enquiry &amp; Quote</div><div style="font-size:.84rem;color:var(--muted);line-height:1.7;">Contact us or use our AI assistant. We respond with detailed pricing and availability within 24 hours.</div></div>
+          </div>
+          <div style="display:flex;gap:20px;align-items:flex-start;padding:24px;background:var(--card);border:1px solid var(--border);border-radius:14px;box-shadow:var(--sh-sm);transition:all .3s var(--ease);" onmouseenter="this.style.boxShadow='var(--sh-lg)';this.style.borderColor='rgba(79,70,229,.15)'" onmouseleave="this.style.boxShadow='var(--sh-sm)';this.style.borderColor='var(--border)'">
+            <div style="width:40px;height:40px;background:var(--indigo);border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:.9rem;flex-shrink:0;">02</div>
+            <div><div style="font-weight:700;margin-bottom:5px;">Order Confirmation</div><div style="font-size:.84rem;color:var(--muted);line-height:1.7;">Approve the quote, confirm specifications. Our team prepares your order with full documentation support.</div></div>
+          </div>
+          <div style="display:flex;gap:20px;align-items:flex-start;padding:24px;background:var(--card);border:1px solid var(--border);border-radius:14px;box-shadow:var(--sh-sm);transition:all .3s var(--ease);" onmouseenter="this.style.boxShadow='var(--sh-lg)';this.style.borderColor='rgba(79,70,229,.15)'" onmouseleave="this.style.boxShadow='var(--sh-sm)';this.style.borderColor='var(--border)'">
+            <div style="width:40px;height:40px;background:var(--indigo);border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:.9rem;flex-shrink:0;">03</div>
+            <div><div style="font-weight:700;margin-bottom:5px;">Quality Control</div><div style="font-size:.84rem;color:var(--muted);line-height:1.7;">Every batch inspected for weight, tolerance and finish before packaging. Zero compromise on quality.</div></div>
+          </div>
+          <div style="display:flex;gap:20px;align-items:flex-start;padding:24px;background:var(--card);border:1px solid var(--border);border-radius:14px;box-shadow:var(--sh-sm);transition:all .3s var(--ease);" onmouseenter="this.style.boxShadow='var(--sh-lg)';this.style.borderColor='rgba(79,70,229,.15)'" onmouseleave="this.style.boxShadow='var(--sh-sm)';this.style.borderColor='var(--border)'">
+            <div style="width:40px;height:40px;background:var(--teal);border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:.9rem;flex-shrink:0;">04</div>
+            <div><div style="font-weight:700;margin-bottom:5px;">Dispatch &amp; Deliver</div><div style="font-size:.84rem;color:var(--muted);line-height:1.7;">Packed, documented, and shipped with tracking, compliance certificates and full export paperwork.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="sec sec-white">
+  <div class="wrap">
+    <div class="rv" style="text-align:center;max-width:500px;margin:0 auto 52px;">
+      <div class="eyebrow" style="justify-content:center;">Our People</div>
+      <h2 class="stitle">The Team Behind <em>Aayuki</em></h2>
+      <div class="srule" style="margin:14px auto 0;"></div>
+    </div>
+    <div class="team-grid">
+      <div class="team-card rv" style="transition-delay:.05s"><div class="team-av" style="animation-delay:0s"><img src="IMAGES/m&s/OWNER.png" alt="Director" style="width:100%;height:100%;object-fit:contain;"></div><div class="team-name">AMIT RATHOD</div><div class="team-role">Director &amp; Export Head</div><div class="team-bio">25+ years in plumbing fittings manufacturing. Leads all export operations and international client relationships personally.</div></div>
+      <div class="team-card rv" style="transition-delay:.1s"><div class="team-av" style="animation-delay:.4s"><img src="IMAGES/m&s/TEAM.png" alt="Production Team" style="width:100%;height:100%;object-fit:contain;"></div><div class="team-name">PRODUCTION TEAM</div><div class="team-role">Manufacturing &amp; QC</div><div class="team-bio">Skilled engineers and quality inspectors ensuring every product meets international standards before every dispatch.</div></div>
+      <div class="team-card rv" style="transition-delay:.15s"><div class="team-av" style="animation-delay:.8s"><img src="IMAGES/m&s/EXPORT.png" alt="Export Desk" style="width:100%;height:100%;object-fit:contain;"></div><div class="team-name">EXPORT DESK</div><div class="team-role">Logistics &amp; Documentation</div><div class="team-bio">Specialists in international freight, customs documentation and ensuring smooth delivery to 30+ countries worldwide.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div style="background:linear-gradient(135deg,var(--indigo),var(--indigo2));padding:80px 0;">
+  <div class="wrap" style="text-align:center;" class="rv">
+    <div class="eyebrow" style="justify-content:center;color:rgba(255,255,255,.7);">Ready to Start?</div>
+    <h2 style="font-family:var(--fp);font-size:clamp(1.8rem,4vw,2.6rem);font-weight:700;color:#fff;margin-bottom:14px;letter-spacing:-.3px;">Let's Build Something <em style="font-style:italic;font-weight:400;">Together</em></h2>
+    <p style="font-size:.95rem;color:rgba(255,255,255,.7);max-width:440px;margin:0 auto 36px;line-height:1.8;">Whether you're a first-time buyer or established importer — we make sourcing simple, reliable and enjoyable.</p>
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+      <a href="contact.html" class="btn btn-white"><i class="bi bi-send"></i> Get a Quote</a>
+      <a href="products.html" class="btn btn-outline-white"><i class="bi bi-grid-3x3-gap-fill"></i> View Products</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div><div class="foot-logo-name">Aayuki<span>.</span></div><div class="foot-logo-tag">Export</div><div class="foot-desc">Your trusted exporting partner for premium plumbing fittings from Rajkot, India to the world.</div><div style="margin-top:20px;"><a href="#" class="soc"><i class="bi bi-linkedin"></i></a><a href="#" class="soc"><i class="bi bi-whatsapp"></i></a><a href="mailto:info@duraexport.uk" class="soc"><i class="bi bi-envelope"></i></a></div></div>
+      <div><h6>Navigate</h6><a href="index.html" class="flink">Home</a><a href="about.html" class="flink">About Us</a><a href="products.html" class="flink">Products</a><a href="gallery.html" class="flink">Gallery</a><a href="reviews.html" class="flink">Reviews</a><a href="contact.html" class="flink">Contact</a><a href="ai.html" class="flink">AI Assistant</a></div>
+      <div><h6>Products</h6><a href="products.html" class="flink">SWR Series</a><a href="products.html" class="flink">PP Fittings</a><a href="products.html" class="flink">Floor Traps</a><a href="products.html" class="flink">Shower Plates</a><a href="products.html" class="flink">Waste Adapters</a></div>
+      <div><h6>Contact</h6><div style="font-size:.83rem;color:rgba(255,255,255,.45);line-height:1.9;">Plot No. 14, Survey No. 149,<br>Vavdi Industrial Area,<br>Rajkot – 360004, Gujarat<br><br><a href="tel:+919825045496" style="color:#818cf8;">+91 98250 45496</a><br>info@duraexport.uk</div></div>
+    </div>
+    <div class="foot-bottom"><div class="foot-copy">© 2025 AAYUKI EXPORT · RAJKOT, INDIA</div><div class="foot-copy">BS EN 1329-1 · BS4514 · ISO3633 · SN4</div></div>
+  </div>
+</footer>
+<script src="shared.js"></script><script>initAll('about.html');</script>
+</body></html>

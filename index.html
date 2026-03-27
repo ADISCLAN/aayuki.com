@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Aayuki  - YOUR TRUSTED PARTNER.</title>
+<link rel="stylesheet" href="style.css"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet"/>
+<style>
+/* ── NAV LOGO ── */
+.nav-logo-img{height:50px;width:auto;object-fit:contain;transition:transform .3s var(--ease);}
+.nav-logo:hover .nav-logo-img{transform:scale(1.05);}
+
+/* ── HERO ── */
+#hero{min-height:100vh;display:flex;flex-direction:column;position:relative;overflow:hidden;background:var(--surface);}
+.hero-bg{position:absolute;inset:0;pointer-events:none;}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black,transparent);}
+.hero-blob{position:absolute;border-radius:50%;filter:blur(100px);pointer-events:none;}
+.hb1{width:480px;height:480px;background:rgba(79,70,229,.09);top:-80px;right:5%;animation:bfa 10s ease-in-out infinite;}
+.hb2{width:320px;height:320px;background:rgba(13,148,136,.06);bottom:10%;left:10%;animation:bfa 13s ease-in-out infinite reverse;}
+.hb3{width:250px;height:250px;background:rgba(180,83,9,.05);top:40%;right:20%;animation:bfa 8s ease-in-out infinite 3s;}
+@keyframes bfa{0%,100%{transform:translate(0,0)scale(1);}40%{transform:translate(12px,-18px)scale(1.03);}70%{transform:translate(-10px,14px)scale(.97);}}
+.hero-body{flex:1;display:grid;grid-template-columns:1fr 460px;gap:60px;align-items:center;max-width:1380px;margin:0 auto;padding:120px 40px 60px;width:100%;position:relative;z-index:1;}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:100px;background:rgba(79,70,229,.07);border:1px solid rgba(79,70,229,.15);font-family:var(--fm);font-size:.6rem;letter-spacing:2px;text-transform:uppercase;color:var(--indigo);margin-bottom:24px;animation:fadeUp .6s var(--ease) .1s both;}
+.hero-tag-dot{width:6px;height:6px;border-radius:50%;background:var(--indigo);animation:pulse 2s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:none;}}
+.hero-h1{font-family:var(--fp);font-size:clamp(3rem,6.5vw,5.8rem);font-weight:700;line-height:.98;letter-spacing:-.5px;margin-bottom:24px;}
+.hero-h1 .line{display:block;overflow:hidden;}
+.hero-h1 .li{display:block;animation:slideUp .9s var(--ease) both;}
+.hero-h1 .line:nth-child(1) .li{animation-delay:.2s;}
+.hero-h1 .line:nth-child(2) .li{animation-delay:.35s;}
+.hero-h1 .line:nth-child(3) .li{animation-delay:.5s;}
+.hero-h1 .em{font-style:italic;font-weight:400;color:var(--indigo);}
+@keyframes slideUp{from{transform:translateY(100%);}to{transform:translateY(0);}}
+.hero-p{font-size:1.02rem;color:var(--muted);line-height:1.9;max-width:480px;margin-bottom:36px;animation:fadeUp .7s var(--ease) .7s both;}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;animation:fadeUp .7s var(--ease) .85s both;}
+.hero-trust{display:flex;align-items:center;gap:16px;margin-top:36px;animation:fadeUp .7s var(--ease) 1s both;}
+.ht-label{font-family:var(--fm);font-size:.58rem;letter-spacing:2px;color:var(--muted2);text-transform:uppercase;}
+.ht-certs{display:flex;gap:6px;flex-wrap:wrap;}
+.ht-cert{font-family:var(--fm);font-size:.56rem;padding:4px 9px;border-radius:4px;background:var(--bg2);border:1px solid var(--border2);color:var(--muted);}
+
+/* Hero right card */
+.hero-card{background:var(--card);border:1px solid var(--border);border-radius:20px;box-shadow:var(--sh-xl);overflow:hidden;animation:fadeUp .8s var(--ease) .5s both;position:relative;}
+.hc-head{padding:20px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.hc-badge{font-family:var(--fm);font-size:.58rem;letter-spacing:2px;text-transform:uppercase;color:var(--indigo);display:flex;align-items:center;gap:7px;}
+.hc-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s ease-in-out infinite;}
+.hc-count{font-family:var(--fm);font-size:.58rem;color:var(--muted2);}
+.hc-visual{height:320px;display:flex;align-items:center;justify-content:center;font-size:5rem;background:linear-gradient(135deg,rgba(79,70,229,.04),rgba(13,148,136,.04));border-bottom:1px solid var(--border);position:relative;overflow:hidden;}
+.hc-visual::before{content:'';position:absolute;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(79,70,229,.08),transparent 70%);}
+.hc-emoji{position:relative;z-index:1;transition:transform .5s var(--ease);max-width:280px;max-height:280px;object-fit:contain;}
+.hero-card:hover .hc-emoji{transform:scale(1.1) rotate(5deg);}
+.hc-body{padding:20px 24px;}
+.hc-name{font-size:1rem;font-weight:700;margin-bottom:4px;color:var(--text);}
+.hc-spec{font-family:var(--fm);font-size:.6rem;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;}
+.hc-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;}
+.hc-tag{font-family:var(--fm);font-size:.57rem;padding:3px 9px;border-radius:4px;background:rgba(79,70,229,.06);border:1px solid rgba(79,70,229,.12);color:var(--indigo);}
+.hc-footer{padding:14px 24px;border-top:1px solid var(--border);background:var(--bg2);display:flex;align-items:center;justify-content:space-between;}
+.hc-nav{display:flex;gap:5px;}
+.hc-dot2{width:6px;height:6px;border-radius:50%;background:var(--border2);cursor:none;transition:background .25s,width .25s;}
+.hc-dot2.on{background:var(--indigo);width:18px;border-radius:3px;}
+.hc-arr{display:flex;gap:6px;}
+.arr-btn{width:28px;height:28px;border-radius:6px;border:1px solid var(--border2);background:transparent;color:var(--muted);font-size:.7rem;cursor:none;display:flex;align-items:center;justify-content:center;transition:border-color .2s,color .2s,background .2s;}
+.arr-btn:hover{border-color:var(--indigo);color:var(--indigo);background:rgba(79,70,229,.05);}
+.float-badge{position:absolute;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px 16px;box-shadow:var(--sh-md);min-width:120px;}
+.fb1{top:-14px;right:-14px;animation:fadeUp .7s var(--ease) 1.1s both;}
+.fb2{bottom:-18px;left:-22px;animation:fadeUp .7s var(--ease) 1.3s both;}
+.fb-num{font-size:1.7rem;font-weight:700;line-height:1;color:var(--text);}
+.fb-num .u{font-size:.9rem;color:var(--indigo);}
+.fb-lbl{font-family:var(--fm);font-size:.52rem;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-top:3px;}
+
+/* Ticker */
+.ticker-wrap{background:var(--indigo);overflow:hidden;padding:12px 0;position:relative;}
+.ticker-wrap::before{content:'';position:absolute;left:0;top:0;bottom:0;width:80px;background:linear-gradient(to right,var(--indigo),transparent);z-index:1;pointer-events:none;}
+.ticker-wrap::after{content:'';position:absolute;right:0;top:0;bottom:0;width:80px;background:linear-gradient(to left,var(--indigo),transparent);z-index:1;pointer-events:none;}
+.ticker-track{display:flex;white-space:nowrap;animation:tick 30s linear infinite;}
+.ticker-track:hover{animation-play-state:paused;}
+.ti{font-family:var(--fm);font-size:.62rem;letter-spacing:2px;color:rgba(255,255,255,.8);padding:0 24px;display:inline-flex;align-items:center;gap:10px;animation:fadeSlide 1s ease-in-out;}
+.ti::after{content:'·';color:rgba(255,255,255,.4);animation:pulse 2s ease-in-out infinite;}
+@keyframes tick{to{transform:translateX(-50%);}}
+@keyframes fadeSlide{from{opacity:0;transform:translateY(-5px);}to{opacity:1;transform:translateY(0);}}
+@keyframes pulse{0%,100%{opacity:.4;}50%{opacity:1;}}
+
+/* Stats */
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);background:var(--surface);border-bottom:1px solid var(--border);}
+.stat-cell{padding:36px 32px;border-right:1px solid var(--border);position:relative;}
+.stat-cell:last-child{border-right:none;}
+.stat-cell::after{content:'';position:absolute;bottom:0;left:24px;right:24px;height:2px;background:linear-gradient(90deg,var(--indigo),var(--teal));transform:scaleX(0);transition:transform .4s var(--ease);}
+.stat-cell:hover::after{transform:scaleX(1);}
+.stat-n{font-family:var(--fp);font-size:2.8rem;font-weight:700;line-height:1;color:var(--text);}
+.stat-n .u{font-size:1.4rem;color:var(--indigo);}
+.stat-l{font-family:var(--fm);font-size:.57rem;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-top:7px;}
+
+/* Why choose */
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:60px;}
+.why-card{padding:36px 32px;border:1px solid var(--border);border-radius:16px;background:var(--card);box-shadow:var(--sh-sm);transition:all .35s var(--ease);cursor:default;position:relative;overflow:hidden;}
+.why-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--indigo),var(--teal));transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease);}
+.why-card:hover{box-shadow:var(--sh-lg);transform:translateY(-4px);border-color:rgba(79,70,229,.14);}
+.why-card:hover::before{transform:scaleX(1);}
+.why-num{font-family:var(--fm);font-size:.56rem;letter-spacing:3px;color:var(--muted2);margin-bottom:20px;}
+.why-icon{width:70px;height:70px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:18px;overflow:hidden;}
+.why-icon img{width:46px;height:46px;object-fit:contain;animation:continuousZoom 2s ease-in-out infinite;}
+.why-card:hover .why-icon img{animation:none;transform:scale(1.3) rotate(8deg);}
+@keyframes continuousZoom{0%{transform:scale(0.9);}50%{transform:scale(1.15);}100%{transform:scale(0.9);}}
+.wi-indigo{background:rgba(79,70,229,.08);}
+.wi-teal{background:rgba(13,148,136,.08);}
+.wi-gold{background:rgba(180,83,9,.08);}
+.wi-green{background:rgba(5,150,105,.08);}
+.why-title{font-size:1rem;font-weight:700;margin-bottom:8px;color:var(--text);}
+.why-body{font-size:.85rem;color:var(--muted);line-height:1.8;}
+
+/* Featured products */
+.feat-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:56px;}
+.feat-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:28px 24px;box-shadow:var(--sh-sm);transition:all .35s var(--ease);cursor:none;}
+.feat-card:hover{box-shadow:var(--sh-lg);transform:translateY(-4px);border-color:rgba(79,70,229,.14);}
+.feat-emoji{width:60px;height:60px;margin-bottom:16px;display:block;transition:transform .4s var(--ease);object-fit:contain;}
+.feat-card:hover .feat-emoji{transform:scale(1.1);}
+.feat-cat{font-family:var(--fm);font-size:.57rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:7px;display:block;}
+.feat-name{font-size:.95rem;font-weight:700;margin-bottom:5px;color:var(--text);}
+.feat-spec{font-size:.8rem;color:var(--muted);line-height:1.65;}
+.feat-link{display:inline-flex;align-items:center;gap:5px;font-size:.78rem;font-weight:600;margin-top:14px;cursor:none;transition:gap .2s;}
+.feat-card:hover .feat-link{gap:8px;}
+
+/* CTA band */
+.cta-band{background:var(--indigo);padding:80px 0;position:relative;overflow:hidden;}
+.cta-band::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 80% 50%,rgba(255,255,255,.06),transparent);}
+.cta-inner{max-width:1380px;margin:0 auto;padding:0 40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:32px;position:relative;z-index:1;}
+.cta-text h2{font-family:var(--fp);font-size:clamp(1.8rem,4vw,2.6rem);font-weight:700;color:#fff;letter-spacing:-.3px;margin-bottom:8px;}
+.cta-text p{font-size:.95rem;color:rgba(255,255,255,.7);max-width:460px;line-height:1.8;}
+.btn-white{background:#fff;color:var(--indigo);font-weight:700;}
+.btn-white:hover{background:#f0efff;box-shadow:0 10px 36px rgba(0,0,0,.15);transform:translateY(-2px);}
+.btn-outline-white{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.35);}
+.btn-outline-white:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.6);}
+
+@media(max-width:1100px){.hero-body{grid-template-columns:1fr;}.hero-card{max-width:460px;}.float-badge{display:none;}}
+@media(max-width:900px){.stats-grid{grid-template-columns:1fr 1fr;}.why-grid{grid-template-columns:1fr 1fr;}.feat-strip{grid-template-columns:1fr 1fr;}.hero-body{padding:120px 24px 60px;}}
+@media(max-width:600px){.feat-strip{grid-template-columns:1fr;}.why-grid{grid-template-columns:1fr;}.stats-grid{grid-template-columns:1fr 1fr;}}
+</style>
+</head>
+<body>
+<div id="prog"></div><div id="cur"></div><div id="curl"></div>
+
+<!-- SCROLL TO TOP BUTTON -->
+<button id="scrollTop" aria-label="Scroll to top">
+  <i class="bi bi-arrow-up"></i>
+</button>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="logo/AAYUKI.jpg" alt="Aayuki Logo" class="nav-logo-img" />
+       <div class="nav-logo-name">Aayuki<span> </span></div>
+    </a>
+     
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="reviews.html">Reviews</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="ai.html" class="nav-cta">AI Assistant</a></li>
+    </ul>
+    <div class="ham" id="ham"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+<div class="mob" id="mob">
+  <span class="mob-close" id="mob-close"><i class="bi bi-x-lg"></i></span>
+  <a href="index.html">Home</a><a href="about.html">About</a><a href="products.html">Products</a>
+  <a href="gallery.html">Gallery</a><a href="reviews.html">Reviews</a>
+  <a href="contact.html">Contact</a><a href="ai.html">AI Assistant</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"><div class="hero-grid"></div><div class="hero-blob hb1"></div><div class="hero-blob hb2"></div><div class="hero-blob hb3"></div></div>
+  <div class="hero-body">
+    <div>
+      <div class="hero-tag"><span class="hero-tag-dot"></span>Rajkot · Gujarat · India · Est. 2000</div>
+      <h1 class="hero-h1">
+        <span class="line"><span class="li">Your Trusted</span></span>
+        <span class="line"><span class="li"><em>Export</em></span></span>
+        <span class="line"><span class="li">Partner.</span></span>
+      </h1>
+      <p class="hero-p">Premium PVC-U SWR fittings, PP pipe fittings, floor traps, shower plates &amp; more — engineered to BS EN 1329-1 &amp; ISO3633 standards. Exported to 30+ countries worldwide.</p>
+      <div class="hero-btns">
+        <a href="products.html" class="btn btn-p"><i class="bi bi-grid-3x3-gap-fill"></i> Explore Products</a>
+        <a href="ai.html" class="btn btn-g"><i class="bi bi-stars"></i> Ask AI Assistant</a>
+      </div>
+      <div class="hero-trust">
+        <span class="ht-label">Certified</span>
+        <div class="ht-certs">
+          <span class="ht-cert">BS EN 1329-1</span>
+          <span class="ht-cert">ISO3633</span>
+          <span class="ht-cert">SN4</span>
+          <span class="ht-cert">BS4514</span>
+        </div>
+      </div>
+    </div>
+    <div style="position:relative;">
+      <div class="hero-card">
+        <div class="hc-head">
+          <div class="hc-badge"><div class="hc-dot"></div>Featured Product</div>
+          <div class="hc-count" id="hc-idx">1 / 5</div>
+        </div>
+        <div class="hc-visual"><img class="hc-emoji" id="hc-emoji" src="IMAGES/GALLERY/1.jpg" alt="Product" /></div>
+        <div class="hc-body">
+          <div class="hc-name" id="hc-name">SWR Tee — 110 MM</div>
+          <div class="hc-spec" id="hc-spec">PVC-U · BS4514 · BS4660 · 611g</div>
+          <div class="hc-tags" id="hc-tags"><span class="hc-tag">110 MM</span><span class="hc-tag">BS EN 1329-1</span></div>
+        </div>
+        <div class="hc-footer">
+          <div class="hc-nav" id="hc-nav"></div>
+          <div class="hc-arr">
+            <button class="arr-btn" onclick="prevCard()"><i class="bi bi-chevron-left"></i></button>
+            <button class="arr-btn" onclick="nextCard()"><i class="bi bi-chevron-right"></i></button>
+          </div>
+        </div>
+      </div>
+      <div class="float-badge fb1"><div class="fb-num"><span class="count" data-to="50" data-dur="1800">0</span><span class="u">+</span></div><div class="fb-lbl">Product SKUs</div></div>
+      <div class="float-badge fb2"><div class="fb-num"><span class="count" data-to="30" data-dur="1800">0</span><span class="u">+</span></div><div class="fb-lbl">Export Markets</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <span class="ti">SWR Series PVC-U</span><span class="ti">PP Fittings PPCP</span><span class="ti">Floor Traps PVD Gold</span><span class="ti">Shower Plates MS/SS</span><span class="ti">Waste Adapters 32-40MM</span><span class="ti">Pushfit 15-22MM</span><span class="ti">BS EN 1329-1 Certified</span><span class="ti">ISO 3633 Standard</span><span class="ti">SN4 Stiffness Class</span>
+    <span class="ti">SWR Series PVC-U</span><span class="ti">PP Fittings PPCP</span><span class="ti">Floor Traps PVD Gold</span><span class="ti">Shower Plates MS/SS</span><span class="ti">Waste Adapters 32-40MM</span><span class="ti">Pushfit 15-22MM</span><span class="ti">BS EN 1329-1 Certified</span><span class="ti">ISO 3633 Standard</span><span class="ti">SN4 Stiffness Class</span>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-grid rv">
+  <div class="stat-cell"><div class="stat-n"><span class="count" data-to="50" data-dur="1800">0</span><span class="u">+</span></div><div class="stat-l">Product SKUs</div></div>
+  <div class="stat-cell"><div class="stat-n"><span class="count" data-to="25" data-dur="2000">0</span><span class="u">+</span></div><div class="stat-l">Years Experience</div></div>
+  <div class="stat-cell"><div class="stat-n"><span class="count" data-to="30" data-dur="1800">0</span><span class="u">+</span></div><div class="stat-l">Export Markets</div></div>
+  <div class="stat-cell"><div class="stat-n">6<span class="u">+</span></div><div class="stat-l">Certifications</div></div>
+</div>
+
+<!-- WHY CHOOSE -->
+<section class="sec sec-white">
+  <div class="wrap">
+    <div class="rv"><div class="eyebrow">Why Aayuki</div><h2 class="stitle">The Difference is in the <em>Details</em></h2><div class="srule"></div></div>
+    <div class="why-grid">
+      <div class="why-card rv" style="transition-delay:.05s"><div class="why-num">01</div><div class=""><img src="IMAGES/logo/1.jpg" alt="Trophy" /></div><div class="why-title">International Certifications</div><div class="why-body">BS EN 1329-1, BS4514, BS4660, ISO3633 &amp; SN4 — every product certified for major global markets.</div></div>
+      <div class="why-card rv" style="transition-delay:.1s"><div class="why-num">02</div><div class=""><img src="IMAGES/logo/2.jpg" alt="Globe" /></div><div class="why-title">30+ Export Markets</div><div class="why-body">Active shipping to Europe, Africa, Middle East &amp; Asia with full logistics and export documentation.</div></div>
+      <div class="why-card rv" style="transition-delay:.15s"><div class="why-num">03</div><div class=""><img src="IMAGES/logo/3.jpg" alt="Quality Control" /></div><div class="why-title">Precision Quality Control</div><div class="why-body">Weight accuracy, dimensional tolerances, and finish quality checked on every batch before dispatch.</div></div>
+      <div class="why-card rv" style="transition-delay:.2s"><div class="why-num">04</div><div class=""><img src="IMAGES/logo/4.jpg" alt="Package" /></div><div class="why-title">One-Stop Product Range</div><div class="why-body">SWR, PP, Floor Traps, Shower Plates, Adapters, Pushfit, PVC Pipes — everything from one reliable source.</div></div>
+      <div class="why-card rv" style="transition-delay:.25s"><div class="why-num">05</div><div class=""><img src="IMAGES/logo/5.jpg" alt="Fast Service" /></div><div class="why-title">24-Hour Quote Turnaround</div><div class="why-body">Direct communication with our export team. No middlemen. Competitive pricing within 24 hours.</div></div>
+      <div class="why-card rv" style="transition-delay:.3s"><div class="why-num">06</div><div class=""><img src="IMAGES/logo/6.jpg" alt="AI Assistant" /></div><div class="why-title">AI-Powered Product Support</div><div class="why-body">Our Claude-powered AI assistant knows every product spec. Get instant answers any time, any day.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED PRODUCTS -->
+<section class="sec sec-alt">
+  <div class="wrap">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:20px;" class="rv">
+      <div><div class="eyebrow">Top Products</div><h2 class="stitle">Featured <em>Range</em></h2><div class="srule"></div></div>
+      <a href="products.html" class="btn btn-g" style="margin-bottom:20px;">View All <i class="bi bi-arrow-right"></i></a>
+    </div>
+    <div class="feat-strip">
+      <a href="products.html" class="feat-card rv" style="transition-delay:.05s;display:block;">
+        <img class="feat-emoji" src="IMAGES/GALLERY/tee.png" alt="SWR Tee" />
+        <span class="feat-cat" style="color:var(--indigo);">SWR Series</span>
+        <div class="feat-name">Tee &amp; T/S Tee</div>
+        <div class="feat-spec">PVC-U · 110 MM · BS4514 · 611–660g <br><br></div>
+        <div class="feat-link" style="color:var(--indigo);">Explore <i class="bi bi-arrow-right"></i></div>
+      </a>
+      <a href="products.html" class="feat-card rv" style="transition-delay:.1s;display:block;">
+        <img class="feat-emoji" src="IMAGES/GALLERY/floor-trap.png" alt="Floor Trap" />
+        <span class="feat-cat" style="color:var(--gold);">Floor Trap</span>
+        <div class="feat-name">Square Drain Grating</div>
+        <div class="feat-spec">130×130 MM · PVD Gold/Rose/Black · 360g</div>
+        <div class="feat-link" style="color:var(--gold);">Explore <i class="bi bi-arrow-right"></i></div>
+      </a>
+      <a href="products.html" class="feat-card rv" style="transition-delay:.15s;display:block;">
+        <img class="feat-emoji" src="IMAGES/GALLERY/90 ds.png" alt="PP Elbow" />
+        <span class="feat-cat" style="color:var(--teal);">PP Fittings</span>
+        <div class="feat-name">90° Elbows SS &amp; DS</div>
+        <div class="feat-spec">PPCP · 32 MM &amp; 40 MM · 3 Colours<br><br></div>
+        <div class="feat-link" style="color:var(--teal);">Explore <i class="bi bi-arrow-right"></i></div>
+      </a>
+      <a href="products.html" class="feat-card rv" style="transition-delay:.2s;display:block;">
+        <img class="feat-emoji" src="IMAGES/GALLERY/chamber.png" alt="Shower Plate" />
+        <span class="feat-cat" style="color:var(--indigo);">Inspection Chambers</span>
+        <div class="feat-name">Inspection Chambers System </div>
+        <div class="feat-spec">PVC-U · SN4 / SN8 · Leak-Proof · Underground Drainage </div>
+        <div class="feat-link" style="color:var(--indigo);">Explore <i class="bi bi-arrow-right"></i></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-band rv">
+  <div class="cta-inner">
+    <div class="cta-text">
+      <h2>Ready to Source with Confidence?</h2>
+      <p>Get a personalised quote in 24 hours or use our AI assistant to find the exact products you need instantly.</p>
+    </div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;">
+      <a href="contact.html" class="btn btn-white"><i class="bi bi-send"></i> Get a Quote</a>
+      <a href="ai.html" class="btn btn-outline-white"><i class="bi bi-stars"></i> Ask AI</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div><div class="foot-logo-name">Aayuki<span>.</span></div><div class="foot-logo-tag">Export</div><div class="foot-desc">Your trusted exporting partner for premium plumbing fittings from Rajkot, India to the world.</div><div style="margin-top:20px;"><a href="#" class="soc"><i class="bi bi-linkedin"></i></a><a href="#" class="soc"><i class="bi bi-whatsapp"></i></a><a href="mailto:info@duraexport.uk" class="soc"><i class="bi bi-envelope"></i></a></div></div>
+      <div><h6>Navigate</h6><a href="index.html" class="flink">Home</a><a href="about.html" class="flink">About Us</a><a href="products.html" class="flink">Products</a><a href="gallery.html" class="flink">Gallery</a><a href="reviews.html" class="flink">Reviews</a><a href="contact.html" class="flink">Contact</a><a href="ai.html" class="flink">AI Assistant</a></div>
+      <div><h6>Products</h6><a href="products.html" class="flink">SWR Series</a><a href="products.html" class="flink">PP Fittings</a><a href="products.html" class="flink">Floor Traps</a><a href="products.html" class="flink">Shower Plates</a><a href="products.html" class="flink">Waste Adapters</a><a href="products.html" class="flink">Pushfit Items</a><a href="products.html" class="flink">PVC Pipes</a></div>
+      <div><h6>Contact</h6><div style="font-size:.83rem;color:rgba(255,255,255,.45);line-height:1.9;">Plot No. 14, Survey No. 149,<br>Vavdi Industrial Area,<br>Rajkot – 360004, Gujarat, India<br><br><a href="tel:+919825045496" style="color:#818cf8;">+91 98250 45496</a><br>info@duraexport.uk<br>anand@duraexport.uk</div></div>
+    </div>
+    <div class="foot-bottom"><div class="foot-copy">© 2025 AAYUKI EXPORT · RAJKOT, INDIA</div><div class="foot-copy">BS EN 1329-1 · BS4514 · ISO3633 · SN4</div></div>
+  </div>
+</footer>
+
+<script src="shared.js"></script>
+<script>
+initAll('index.html');
+const prods=[
+  {e:'IMAGES/GALLERY/3.jpg',n:'SWR Tee — 110 MM',s:'PVC-U · BS4514 · BS4660 · 611g',t:['110 MM','BS EN 1329-1']},
+  {e:'IMAGES/GALLERY/18.jpg',n:'Union Joint — 110 MM',s:'PVC-U · Threaded · Leak-Proof · 850g (Approx)',t:['Easy Install','High Strength']},  {e:'IMAGES/GALLERY/14.jpg',n:'Square Floor Trap',s:'130×130 MM · 91 MM Hole · 360g',t:['PVD Gold','PVD Black']},
+  {e:'IMAGES/GALLERY/8.jpg',n:'PP 90° Elbow 32 MM',s:'PPCP · Black / White / Grey · 30g',t:['32 MM','PPCP']},
+  {e:'IMAGES/GALLERY/1.jpg',n:'PVC-U 45° Access Elbow',s:'PVC-U Material · 110 mm · 638g Approx',t:['BS4514 / BS4660','45° Elbow']}];
+let ci=0;
+function render(){
+  const p=prods[ci];
+  const img=document.getElementById('hc-emoji');
+  img.src=p.e;
+  img.alt=p.n;
+  document.getElementById('hc-name').textContent=p.n;
+  document.getElementById('hc-spec').textContent=p.s;
+  document.getElementById('hc-tags').innerHTML=p.t.map(t=>`<span class="hc-tag">${t}</span>`).join('');
+  document.getElementById('hc-idx').textContent=`${ci+1} / ${prods.length}`;
+  document.getElementById('hc-nav').innerHTML=prods.map((_,i)=>`<div class="hc-dot2${i===ci?' on':''}" onclick="goCard(${i})"></div>`).join('');
+}
+function nextCard(){ci=(ci+1)%prods.length;render();}
+function prevCard(){ci=(ci-1+prods.length)%prods.length;render();}
+function goCard(i){ci=i;render();}
+render();setInterval(nextCard,4200);
+</script>
+</body></html>

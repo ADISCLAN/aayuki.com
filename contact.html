@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Contact — Aayuki Export</title>
+<link rel="stylesheet" href="style.css"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet"/>
+<style>
+.contact-grid{display:grid;grid-template-columns:380px 1fr;gap:28px;}
+.contact-left{background:linear-gradient(160deg,var(--indigo),var(--indigo2));border-radius:20px;padding:52px 44px;position:relative;overflow:hidden;box-shadow:var(--sh-xl);}
+.contact-left::before{content:'A';position:absolute;bottom:-60px;right:-20px;font-family:var(--fp);font-size:16rem;font-weight:700;color:rgba(255,255,255,.06);line-height:1;pointer-events:none;}
+.contact-left h2{font-family:var(--fp);font-size:2rem;font-weight:700;color:#fff;margin-bottom:8px;}
+.contact-left p{font-size:.88rem;color:rgba(255,255,255,.65);line-height:1.8;margin-bottom:36px;}
+.ci{display:flex;gap:14px;margin-bottom:22px;align-items:flex-start;}
+.ci-ic{width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;font-size:.95rem;color:rgba(255,255,255,.8);flex-shrink:0;}
+.ci-label{font-family:var(--fm);font-size:.54rem;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:3px;}
+.ci-val{font-size:.87rem;color:rgba(255,255,255,.85);font-weight:500;line-height:1.6;}
+.ci-val a{color:rgba(255,255,255,.85);}
+.soc2{width:36px;height:36px;border-radius:9px;background:rgba(255,255,255,.12);display:inline-flex;align-items:center;justify-content:center;color:rgba(255,255,255,.65);margin-right:7px;cursor:none;transition:background .2s,color .2s;font-size:.88rem;}
+.soc2:hover{background:rgba(255,255,255,.22);color:#fff;}
+.contact-right{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:52px 48px;box-shadow:var(--sh-md);}
+.contact-right h2{font-family:var(--fp);font-size:1.7rem;font-weight:700;margin-bottom:8px;letter-spacing:-.3px;color:var(--text);}
+.contact-right p{font-size:.87rem;color:var(--muted);margin-bottom:28px;line-height:1.8;}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.fg{margin-bottom:18px;}
+.fg label{font-family:var(--fm);font-size:.57rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted2);display:block;margin-bottom:7px;}
+.fi{width:100%;background:var(--bg2);border:1.5px solid var(--border);border-radius:8px;color:var(--text);font-family:var(--f);font-size:.88rem;padding:12px 14px;outline:none;transition:border-color .25s,box-shadow .25s,background .25s;}
+.fi::placeholder{color:var(--muted2);}
+.fi:focus{border-color:var(--indigo);box-shadow:0 0 0 3px rgba(79,70,229,.07);background:var(--surface);}
+select.fi option{background:var(--surface);}
+.sub-btn{width:100%;padding:15px;background:var(--indigo);border:none;border-radius:8px;color:#fff;font-family:var(--f);font-size:.88rem;font-weight:700;cursor:none;display:flex;align-items:center;justify-content:center;gap:9px;box-shadow:var(--sh-indigo);transition:all .25s var(--ease);}
+.sub-btn:hover{background:var(--indigo2);box-shadow:0 10px 32px rgba(79,70,229,.3);transform:translateY(-2px);}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.faq{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px 22px;cursor:none;box-shadow:var(--sh-sm);transition:all .3s var(--ease);}
+.faq:hover{box-shadow:var(--sh-md);border-color:rgba(79,70,229,.12);transform:translateY(-2px);}
+.faq-q{font-size:.9rem;font-weight:700;margin-bottom:8px;color:var(--text);}
+.faq-a{font-size:.82rem;color:var(--muted);line-height:1.75;}
+.map-ph{background:var(--card);border:1px solid var(--border);border-radius:20px;height:260px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;margin-top:28px;box-shadow:var(--sh-sm);}
+@media(max-width:960px){.contact-grid{grid-template-columns:1fr;}.form-grid{grid-template-columns:1fr;}.faq-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div id="prog"></div><div id="cur"></div><div id="curl"></div>
+
+<!-- SCROLL TO TOP BUTTON -->
+<button id="scrollTop" aria-label="Scroll to top">
+  <i class="bi bi-arrow-up"></i>
+</button>
+
+<nav id="nav"><div class="nav-inner"><a href="index.html" class="nav-logo"><img src="logo/AAYUKI.jpg" alt="Aayuki Logo" class="nav-logo-img" />
+       <div class="nav-logo-name">Aayuki<span> </span></div>
+
+</a>
+<ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="products.html">Products</a></li><li><a href="gallery.html">Gallery</a></li><li><a href="reviews.html">Reviews</a></li><li><a href="contact.html">Contact</a></li><li><a href="ai.html" class="nav-cta">AI Assistant</a></li></ul><div class="ham" id="ham"><span></span><span></span><span></span></div></div></nav>
+<div class="mob" id="mob"><span class="mob-close" id="mob-close"><i class="bi bi-x-lg"></i></span><a href="index.html">Home</a><a href="about.html">About</a><a href="products.html">Products</a><a href="gallery.html">Gallery</a><a href="reviews.html">Reviews</a><a href="contact.html">Contact</a><a href="ai.html">AI Assistant</a></div>
+<div class="page-hero"><div class="ph-inner"><div class="ph-eyebrow">Get In Touch</div><h1 class="ph-title">Let's <em>Talk.</em><br>Request a Quote.</h1><p class="ph-desc">We respond to all enquiries within 24 hours. Call, email, or use our AI assistant for instant product answers.</p></div></div>
+<section class="sec">
+  <div class="wrap">
+    <div class="contact-grid rv">
+      <div class="contact-left">
+        <h2>Contact Us</h2>
+        <p>Ready to source? Our export team will provide full pricing, availability and documentation.</p>
+        <div class="ci"><div class="ci-ic"><i class="bi bi-geo-alt-fill"></i></div><div><div class="ci-label">Address</div><div class="ci-val">Main Road, near Balaji Metal,<br> Mavdi, Rajkot,<br> Gujarat 360405</div></div></div>
+        <div class="ci"><div class="ci-ic"><i class="bi bi-telephone-fill"></i></div><div><div class="ci-label">Phone</div><div class="ci-val"><a href="tel:+919825045496">+91 98250 45496</a></div></div></div>
+        <div class="ci"><div class="ci-ic"><i class="bi bi-envelope-fill"></i></div><div><div class="ci-label">General Enquiries</div><div class="ci-val"><a href="mailto:info@duraexport.uk">info@duraexport.uk</a></div></div></div>
+        <div class="ci"><div class="ci-ic"><i class="bi bi-person-fill"></i></div><div><div class="ci-label">bussiness Owner</div><div class="ci-val"><a href="mailto:anand@duraexport.uk">anand@duraexport.uk</a></div></div></div>
+        <div style="margin-top:28px;"><a href="https://wa.me/919825045496" target="_blank" class="soc2"><i class="bi bi-whatsapp"></i></a><a href="mailto:info@duraexport.uk" class="soc2"><i class="bi bi-envelope"></i></a><a href="https://share.google/XaKwh89zlIbK6OMh2" target="_blank" class="soc2"><i class="bi bi-globe2"></i></a></div>
+      </div>
+      <div class="contact-right">
+        <h2>Send an Enquiry</h2>
+        <p>Fill in your details and we'll respond with pricing, MOQ and availability within 24 hours.</p>
+        <div class="form-grid">
+          <div class="fg"><label>Full Name *</label><input class="fi" id="fn" placeholder="Your full name"/></div>
+          <div class="fg"><label>Email Address *</label><input type="email" class="fi" id="fe" placeholder="you@company.com"/></div>
+          <div class="fg"><label>Phone Number</label><input type="tel" class="fi" id="fp" placeholder="+1 000 000 0000"/></div>
+          <div class="fg"><label>Company Name</label><input class="fi" id="fco" placeholder="Your company"/></div>
+        </div>
+        <div class="fg"><label>Country / Destination Market *</label><input class="fi" id="fcountry" placeholder="Country and shipping destination"/></div>
+        <div class="fg"><label>Product Interest</label><select class="fi" id="fprod"><option value="">Select product category...</option><option>SWR Series (PVC-U)</option><option>PP Fittings 32 MM</option><option>PP Fittings 40 MM</option><option>Floor Traps (Square)</option><option>Floor Traps (Linear)</option><option>Shower / Douche Plates</option><option>Waste Pipe Adapters</option><option>Pushfit Items</option><option>PVC Pipes</option><option>WC Kit</option><option>Multiple Products</option><option>Other</option></select></div>
+        <div class="fg"><label>Message / Quantity Required *</label><textarea class="fi" id="fmsg" rows="4" placeholder="Describe your requirements, approximate quantities, and any specific standards or certifications needed..."></textarea></div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;"><input type="checkbox" id="fai" style="accent-color:var(--indigo);width:14px;height:14px;cursor:none;"><label for="fai" style="font-size:.82rem;color:var(--muted2);cursor:none;">Also send my query to the AI assistant for instant product suggestions</label></div>
+        <button class="sub-btn" onclick="submitContact()"><i class="bi bi-send-fill"></i> Send Enquiry</button>
+        <div id="form-ok" style="display:none;margin-top:14px;padding:14px 16px;background:rgba(5,150,105,.06);border:1px solid rgba(5,150,105,.2);border-radius:8px;font-size:.84rem;color:var(--green);">✅ &nbsp;Enquiry sent! We'll contact you within 24 hours. <a href="ai.html" style="color:var(--indigo);font-weight:600;margin-left:4px;">Get instant answers from AI →</a></div>
+      </div>
+    </div>
+    <div style="margin-top:72px;" class="rv">
+      <div class="eyebrow">Common Questions</div>
+      <h2 class="stitle">FAQs for <em>Importers</em></h2>
+      <div class="srule"></div>
+      <div class="faq-grid" style="margin-top:0;">
+        <div class="faq"><div class="faq-q"><i class="bi bi-question-circle" style="color:var(--indigo);margin-right:8px;"></i>What is your minimum order quantity?</div><div class="faq-a">MOQ varies by product. SWR fittings typically 1 carton. PP fittings sold per packet of 10 or by carton. Contact us for specific MOQ per SKU.</div></div>
+        <div class="faq"><div class="faq-q"><i class="bi bi-question-circle" style="color:var(--indigo);margin-right:8px;"></i>Which standards do your products comply with?</div><div class="faq-a">SWR fittings comply with BS EN 1329-1, BS4514, BS4660, ISO3633, EN1329 and SN4 stiffness class. Compliance certificates provided on request.</div></div>
+        <div class="faq"><div class="faq-q"><i class="bi bi-question-circle" style="color:var(--indigo);margin-right:8px;"></i>Do you handle export documentation?</div><div class="faq-a">Yes — full export documentation including commercial invoice, packing list, certificate of origin, and product compliance certificates with every shipment.</div></div>
+        <div class="faq"><div class="faq-q"><i class="bi bi-question-circle" style="color:var(--indigo);margin-right:8px;"></i>What PP fitting colours are available?</div><div class="faq-a">All PP fittings available in Black, White and Grey in both 32 MM and 40 MM. Mixed colour orders can be accommodated in carton quantities.</div></div>
+        <div class="faq"><div class="faq-q"><i class="bi bi-question-circle" style="color:var(--indigo);margin-right:8px;"></i>How long is delivery to UK / Europe?</div><div class="faq-a">Typically 3–5 weeks by sea freight from Rajkot (via Mundra or JNPT). Air freight available for urgent orders. We ship via major freight forwarders.</div></div>
+        <div class="faq"><div class="faq-q"><i class="bi bi-question-circle" style="color:var(--indigo);margin-right:8px;"></i>Can I get private label / branded products?</div><div class="faq-a">Yes — shower plates available branded as Tiler's Choice or without branding. Contact us to discuss private label options for other product ranges.</div></div>
+        <div class="faq"><div class="faq-q"><i class="bi bi-question-circle" style="color:var(--indigo);margin-right:8px;"></i>What are the floor trap finish options?</div><div class="faq-a">Five finishes available: Matt, Glossy, PVD Gold, PVD Rose and PVD Black. Multiple decorative grate patterns available in each finish.</div></div>
+        <div class="faq"><div class="faq-q"><i class="bi bi-question-circle" style="color:var(--indigo);margin-right:8px;"></i>Can your AI assistant help me find products?</div><div class="faq-a">Absolutely! Our AI assistant has complete knowledge of our catalogue. <a href="ai.html" style="color:var(--indigo);font-weight:600;">Visit the AI page</a> for instant product answers.</div></div>
+      </div>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3692.961112587663!2d70.7956846!3d22.2415542!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3959cb002eefa553%3A0xeb2b32890194754e!2sDURA%20EXPORT!5e0!3m2!1sen!2sin!4v1774547373169!5m2!1sen!2sin" width="100%" height="280" style="border:0;border-radius:20px;margin-top:28px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </div>
+</section>
+<footer><div class="wrap"><div class="foot-grid"><div><div class="foot-logo-name">Aayuki<span>.</span></div><div class="foot-logo-tag">Export</div><div class="foot-desc">Premium plumbing fittings from Rajkot, India to the world.</div><div style="margin-top:20px;"><a href="#" class="soc"><i class="bi bi-linkedin"></i></a><a href="#" class="soc"><i class="bi bi-whatsapp"></i></a><a href="mailto:info@duraexport.uk" class="soc"><i class="bi bi-envelope"></i></a></div></div><div><h6>Navigate</h6><a href="index.html" class="flink">Home</a><a href="about.html" class="flink">About</a><a href="products.html" class="flink">Products</a><a href="gallery.html" class="flink">Gallery</a><a href="reviews.html" class="flink">Reviews</a><a href="contact.html" class="flink">Contact</a><a href="ai.html" class="flink">AI Assistant</a></div><div><h6>Products</h6><a href="products.html" class="flink">SWR Series</a><a href="products.html" class="flink">PP Fittings</a><a href="products.html" class="flink">Floor Traps</a><a href="products.html" class="flink">Shower Plates</a><a href="products.html" class="flink">Waste Adapters</a></div><div><h6>Contact</h6><div style="font-size:.83rem;color:rgba(255,255,255,.45);line-height:1.9;"><a href="tel:+919825045496" style="color:#818cf8;">+91 98250 45496</a><br>info@duraexport.uk<br>anand@duraexport.uk<br><br>Plot No. 14, Vavdi Industrial Area,<br>Rajkot – 360004, Gujarat</div></div></div><div class="foot-bottom"><div class="foot-copy">© 2025 AAYUKI EXPORT</div><div class="foot-copy">BS EN 1329-1 · ISO3633 · SN4</div></div></div></footer>
+<script src="shared.js"></script>
+<script>
+initAll('contact.html');
+function submitContact(){
+  const n=document.getElementById('fn').value.trim(),e=document.getElementById('fe').value.trim(),m=document.getElementById('fmsg').value.trim();
+  if(!n||!e||!m){alert('Please complete Name, Email and Message fields.');return;}
+  document.getElementById('form-ok').style.display='block';
+  ['fn','fe','fp','fco','fcountry','fprod','fmsg'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+  setTimeout(()=>document.getElementById('form-ok').style.display='none',8000);
+}
+</script>
+</body></html>

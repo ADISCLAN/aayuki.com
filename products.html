@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Products — Aayuki Export</title>
+<link rel="stylesheet" href="style.css"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet"/>
+<style>
+.filter-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:48px;}
+.fb{font-family:var(--fm);font-size:.6rem;letter-spacing:1.5px;text-transform:uppercase;padding:9px 20px;border-radius:8px;border:1.5px solid var(--border2);background:transparent;color:var(--muted);cursor:none;transition:all .25s var(--ease);}
+.fb:hover{border-color:var(--indigo);color:var(--indigo);}
+.fb.on{background:var(--indigo);border-color:var(--indigo);color:#fff;box-shadow:var(--sh-indigo);}
+.prod-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.pc{background:var(--card);border:1px solid var(--border);border-radius:16px;box-shadow:var(--sh-sm);overflow:hidden;cursor:none;transition:all .35s var(--ease);}
+.pc:hover{box-shadow:var(--sh-lg);transform:translateY(-5px);border-color:rgba(79,70,229,.14);}
+.pc-vis{height:160px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.pc-vis img{width:100%;height:100%;object-fit:cover;transition:transform .4s var(--ease);}
+.pc:hover .pc-vis img{transform:scale(1.08);}
+.pc-body{padding:22px 22px 0;}
+.pc-cat{font-family:var(--fm);font-size:.56rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:7px;display:block;}
+.pc-name{font-size:.96rem;font-weight:700;margin-bottom:6px;color:var(--text);}
+.pc-desc{font-size:.8rem;color:var(--muted);line-height:1.7;margin-bottom:14px;}
+.pc-specs{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:16px;}
+.spec{font-family:var(--fm);font-size:.56rem;padding:3px 8px;border-radius:4px;background:var(--bg2);border:1px solid var(--border);color:var(--muted);}
+.pc-foot{padding:14px 22px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:var(--bg2);}
+.pc-weight{font-family:var(--fm);font-size:.58rem;color:var(--muted2);}
+.pc-learn{font-family:var(--fm);font-size:.57rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--indigo);display:flex;align-items:center;gap:5px;opacity:0;transform:translateX(-4px);transition:opacity .25s,transform .25s;}
+.pc:hover .pc-learn{opacity:1;transform:none;}
+.modal-overlay{position:fixed;inset:0;background:rgba(26,25,23,.5);backdrop-filter:blur(10px);z-index:5000;display:none;align-items:center;justify-content:center;padding:20px;}
+.modal-overlay.open{display:flex;}
+.modal{background:var(--card);border:1px solid var(--border);border-radius:20px;max-width:600px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:var(--sh-xl);animation:mopen .35s var(--ease);}
+@keyframes mopen{from{opacity:0;transform:scale(.94) translateY(10px);}to{opacity:1;transform:none;}}
+.modal-close{width:36px;height:36px;border-radius:8px;border:1px solid var(--border2);background:transparent;color:var(--muted);font-size:.9rem;cursor:none;display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.modal-close:hover{border-color:var(--indigo);color:var(--indigo);background:rgba(79,70,229,.05);}
+.ms{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:14px;}
+.ms-label{font-family:var(--fm);font-size:.54rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted2);margin-bottom:4px;}
+.ms-val{font-size:.9rem;font-weight:600;color:var(--text);}
+.summary-bar{background:var(--surface);border-bottom:1px solid var(--border);padding:16px 0;position:sticky;top:72px;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.04);}
+@media(max-width:900px){.prod-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:600px){.prod-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div id="prog"></div><div id="cur"></div><div id="curl"></div>
+
+<!-- SCROLL TO TOP BUTTON -->
+<button id="scrollTop" aria-label="Scroll to top">
+  <i class="bi bi-arrow-up"></i>
+</button>
+
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><img src="logo/AAYUKI.jpg" alt="Aayuki Logo" class="nav-logo-img" />      
+       <div class="nav-logo-name">Aayuki<span> </span></div>
+</a>
+    <ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="products.html">Products</a></li><li><a href="gallery.html">Gallery</a></li><li><a href="reviews.html">Reviews</a></li><li><a href="contact.html">Contact</a></li><li><a href="ai.html" class="nav-cta">AI Assistant</a></li></ul>
+    <div class="ham" id="ham"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+<div class="mob" id="mob"><span class="mob-close" id="mob-close"><i class="bi bi-x-lg"></i></span><a href="index.html">Home</a><a href="about.html">About</a><a href="products.html">Products</a><a href="gallery.html">Gallery</a><a href="reviews.html">Reviews</a><a href="contact.html">Contact</a><a href="ai.html">AI Assistant</a></div>
+<div class="page-hero">
+  <div class="ph-inner">
+    <div class="ph-eyebrow">Full Catalogue</div>
+    <h1 class="ph-title">Our Complete <em>Product</em> Range</h1>
+    <p class="ph-desc">15 categories. 50+ SKUs. PVC-U, PPCP, MS, SS — manufactured to global standards. Click any product for full specifications.</p>
+  </div>
+</div>
+<div class="summary-bar">
+  <div class="wrap" style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
+    <span style="font-family:var(--fm);font-size:.62rem;letter-spacing:1px;color:var(--muted);">Showing <strong id="showing" style="color:var(--indigo);">15</strong> of 15 products</span>
+    <div style="flex:1;"></div>
+    <a href="ai.html" class="btn btn-p" style="padding:8px 18px;font-size:.75rem;"><i class="bi bi-stars"></i> Ask AI to find a product</a>
+    <a href="contact.html" class="btn btn-g" style="padding:8px 18px;font-size:.75rem;"><i class="bi bi-send"></i> Request Quote</a>
+  </div>
+</div>
+<section class="sec">
+  <div class="wrap">
+    <div class="filter-bar rv">
+      <button class="fb on" data-f="all">All Products</button>
+      <button class="fb" data-f="swr">SWR Series</button>
+      <button class="fb" data-f="pp">PP Fittings</button>
+      <button class="fb" data-f="floor">Floor Trap</button>
+      <button class="fb" data-f="shower">Shower Plates</button>
+      <button class="fb" data-f="waste">Waste Adapter</button>
+      <button class="fb" data-f="pushfit">Pushfit</button>
+    </div>
+    <div class="prod-grid" id="pg">
+      <div class="pc rv" data-c="swr" data-name="Tee &amp; T/S Tee" data-cat="SWR Series" data-img="IMAGES/product/1.png" data-weight="611–660g" data-size="110 MM" data-std="BS4514 / BS4660 / ISO3633 / EN1329" data-mat="PVC-U" data-col="Grey / Dark" data-desc="Standard socket tee and single-socket T/S tee for soil and waste drainage. Manufactured from unplasticised PVC-U for chemical resistance and long service life. Suitable for above and below ground applications."><div class="pc-vis"><img src="IMAGES/product/1.png" alt="Tee &amp; T/S Tee" loading="lazy"/></div><div class="pc-body"><span class="pc-cat" style="color:var(--indigo);">SWR Series</span><div class="pc-name">Tee &amp; T/S Tee</div><div class="pc-desc">Standard and single socket tee for soil/waste drainage. PVC-U construction.</div><div class="pc-specs"><span class="spec">110 MM</span><span class="spec">BS4514</span><span class="spec">BS4660</span><span class="spec">ISO3633</span></div></div><div class="pc-foot"><span class="pc-weight">611–660g</span><span class="pc-learn">Details <i class="bi bi-arrow-right"></i></span></div></div>
+      <div class="pc rv" data-c="swr" data-name="40° Yee &amp; D/S Yee" data-cat="SWR Series" data-img="IMAGES/product/2.png" data-weight="810–927g" data-size="110 MM" data-std="BS EN 1329-1 BD / 45° Branch SN4" data-mat="PVC-U" data-col="Grey / Dark" data-desc="45° branch yee fittings in single socket and double socket configurations. SN4 stiffness class for underground drainage installation. Angled branch ensures optimal flow and minimises blockage risk."><div class="pc-vis"><img src="IMAGES/product/2.png" alt="40° Yee &amp; D/S Yee" loading="lazy"/></div><div class="pc-body"><span class="pc-cat" style="color:var(--indigo);">SWR Series</span><div class="pc-name">40° Yee &amp; D/S Yee</div><div class="pc-desc">45° branch yee in single and double socket. SN4 rated for underground drainage.</div><div class="pc-specs"><span class="spec">110 MM</span><span class="spec">BS EN 1329-1</span><span class="spec">SN4</span></div></div><div class="pc-foot"><span class="pc-weight">810–927g</span><span class="pc-learn">Details <i class="bi bi-arrow-right"></i></span></div></div>
+      <div class="pc rv" data-c="swr" data-name="90° Elbow &amp; W/Access Bend" data-cat="SWR Series" data-img="IMAGES/product/3.png" data-weight="580–753g" data-size="110 MM" data-std="SN4 BS EN 1329-1 BD / Branch SN4" data-mat="PVC-U" data-col="Grey / Dark" data-desc="Standard 90° elbow and with-access bend. The access bend includes a removable cap for pipe inspection without disconnection. Both SN4 rated to BS EN 1329-1 BD."><div class="pc-vis"><img src="IMAGES/product/3.png" alt="90° Elbow &amp; W/Access Bend" loading="lazy"/></div><div class="pc-body"><span class="pc-cat" style="color:var(--indigo);">SWR Series</span><div class="pc-name">90° Elbow &amp; W/Access Bend</div><div class="pc-desc">Standard elbow and access bend with removable cap for pipe inspection.</div><div class="pc-specs"><span class="spec">110 MM</span><span class="spec">SN4</span><span class="spec">BS EN 1329-1</span></div></div><div class="pc-foot"><span class="pc-weight">580–753g</span><span class="pc-learn">Details <i class="bi bi-arrow-right"></i></span></div></div>
+      <div class="pc rv" data-c="swr" data-name="Access Pipes SS &amp; D/S" data-cat="SWR Series" data-img="IMAGES/product/4.png" data-weight="638–740g" data-size="110 MM" data-std="BS4514 / BS4660 / Pipe SN4 BS EN 1329-1 BD" data-mat="PVC-U" data-col="Grey / Dark" data-desc="Single socket and double socket access pipes. The access eye allows rodding and inspection. Available in plain grey or dark socket. Complies with BS4514, BS4660 and SN4 stiffness class."><div class="pc-vis"><img src="IMAGES/product/4.png" alt="Access Pipes SS &amp; D/S" loading="lazy"/></div><div class="pc-body"><span class="pc-cat" style="color:var(--indigo);">SWR Series</span><div class="pc-name">Access Pipes SS &amp; D/S</div><div class="pc-desc">Single and double socket access pipes with maintenance eye for drainage inspection.</div><div class="pc-specs"><span class="spec">110 MM</span><span class="spec">BS4514</span><span class="spec">BS4660</span></div></div><div class="pc-foot"><span class="pc-weight">638–740g</span><span class="pc-learn">Details <i class="bi bi-arrow-right"></i></span></div></div>
+      <div class="pc rv" data-c="swr" data-name="S/S Elbow W/Access &amp; S/B Elbow" data-cat="SWR Series" data-img="IMAGES/product/5.png" data-weight="508–682g" data-size="110 MM" data-std="BS4514 / BS4660 / ISO3633 / Pipe SN4" data-mat="PVC-U" data-col="Grey / Dark" data-desc="Single socket elbow with access cap and sweep bend elbow fittings. The W/Access allows rodding without dismantling. The S/B provides a gentler radius for smoother flow. Complies with BS4514, BS4660, ISO3633."><div class="pc-vis"><img src="IMAGES/product/5.png" alt="S/S Elbow W/Access &amp; S/B Elbow" loading="lazy"/></div><div class="pc-body"><span class="pc-cat" style="color:var(--indigo);">SWR Series</span><div class="pc-name">S/S Elbow W/Access &amp; S/B Elbow</div><div class="pc-desc">Single socket elbow with access and sweep bend elbow for drainage.</div><div class="pc-specs"><span class="spec">110 MM</span><span class="spec">BS4514</span><span class="spec">ISO3633</span></div></div><div class="pc-foot"><span class="pc-weight">508–682g</span><span class="pc-learn">Details <i class="bi bi-arrow-right"></i></span></div></div>
+      <div class="pc rv" data-c="swr" data-name="D/S Coupler &amp; 45° Elbows" data-cat="SWR Series" data-img="IMAGES/product/6.png" data-weight="300–368g" data-size="110 MM" data-std="SN4 / BS EN 1329-1 BD / BS4514 / EN1329" data-mat="PVC-U" data-col="Grey / Dark" data-desc="Double socket coupler for joining two pipe sections and 45° elbows (single and double socket) for directional changes. SN4 stiffness rating suitable for underground installation."><div class="pc-vis"><img src="IMAGES/product/6.png" alt="D/S Coupler &amp; 45° Elbows" loading="lazy"/></div><div class="pc-body"><span class="pc-cat" style="color:var(--indigo);">SWR Series</span><div class="pc-name">D/S Coupler &amp; 45° Elbows</div><div class="pc-desc">Double socket coupler and 45° elbows for pipeline joins and direction changes.</div><div class="pc-specs"><span class="spec">110 MM</span><span class="spec">SN4</span><span class="spec">BS EN 1329-1</span></div></div><div class="pc-foot"><span class="pc-weight">300–368g</span><span class="pc-learn">Details <i class="bi bi-arrow-right"></i></span></div></div>
+      <div class="pc rv" data-c="swr" data-name="Access Cap &amp; Cover" data-cat="SWR Series" data-img="IMAGES/product/7.png" data-weight="28–101g" data-size="110 MM" data-std="PVC-U Standard" data-mat="PVC-U" data-col="Grey" data-desc="Access cap cover (28g) and full 110 MM access cap (101g) for sealing drainage access points. Watertight seal while remaining easy to remove for maintenance access."><div class="pc-vis"><img src="IMAGES/product/7.png" alt="Access Cap &amp; Cover" loading="lazy"/></div><div class="pc-body"><span class="pc-cat" style="color:var(--indigo);">SWR Series</span><div class="pc-name">Access Cap &amp; Cover</div><div class="pc-desc">110 MM access cap and cap cover for sealing drainage inspection access points.</div><div class="pc-specs"><span class="spec">110 MM</span><span class="spec">PVC-U</span><span class="spec">28–101g</span></div></div><div class="pc-foot"><span class="pc-weight">28–101g</span><span class="pc-learn">Details <i class="bi bi-arrow-right"></i></span></div></div>
+      <div class="pc rv" data-c="pp" data-name="PP 90° Elbows 32 MM" data-cat="PP Fittings" data-img="IMAGES/product/8.png" data-weight="30–36g" data-size="32 MM" data-std="PPCP Standard" data-mat="PPCP" data-col="Black / White / Grey" data-desc="Single socket (SS) and double socket (DS) 90° elbows in polypropylene copolymer. 10 pieces per packet. SS: 40 packets/carton. DS: 34 packets/carton. Suitable for above-ground drainage."><div class="pc-vis"><img src="IMAGES/product/8.png" alt="PP 90° Elbows 32 MM" loading="lazy"/></div><div class="pc-body"><span class="pc-cat" style="color:var(--teal);">PP Fittings</span><div class="pc-name">90° Elbows SS &amp; DS — 32 MM</div><div class="pc-desc">Single and double socket 90° elbows in PPCP. Black, white or grey. 10pcs/packet.</div><div class="pc-specs"><span class="spec">32 MM</span><span class="spec">PPCP</span><span class="spec">10pcs/pkt</span><span class="spec">3 Colours</span></div></div><div class="pc-foot"><span class="pc-weight">30–36g</span><span class="pc-learn" style="color:var(--teal);">Details <i class="bi bi-arrow-right"></i></span></div></div>
+      <div class="pc rv" data-c="pp" data-name="PP Tee, Coupler &amp; Reducer 32 MM" data-cat="PP Fittings" data-img="IMAGES/product/9.png" data-weight="5–55g" data-size="32 MM / 32–40 MM" data-std="PPCP Standard" data-mat="PPCP" data-col="Black / White / Grey" data-desc="32 MM PP range: Tee (55g, 16pkt/ctn), Coupler (25g, 54pkt/ctn), Reducer 32–40 MM (18g, 70pkt/ctn), End Cap (5g, 182pkt/ctn). 10pcs/packet, Black/White/Grey."><div class="pc-vis"><img src="IMAGES/product/9.png" alt="PP Tee, Coupler &amp; Reducer 32 MM" loading="lazy"/></div><div class="pc-body"><span class="pc-cat" style="color:var(--teal);">PP Fittings</span><div class="pc-name">Tee, Coupler &amp; Reducer — 32 MM</div><div class="pc-desc">32 MM tee (55g), coupler (25g), reducer 32–40 MM (18g), end cap (5g).</div><div class="pc-specs"><span class="spec">32 MM</span><span class="spec">PPCP</span><span class="spec">10pcs/pkt</span></div></div><div class="pc-foot"><span class="pc-weight">5–55g</span><span class="pc-learn" style="color:var(--teal);">Details <i class="bi bi-arrow-right"></i></span></div></div>
+      <div class="pc rv" data-c="pp" data-name="PP Full 40 MM Range" data-cat="PP Fittings" data-img="IMAGES/product/10.png" data-weight="6–72g" data-size="40 MM" data-std="PPCP Standard" data-mat="PPCP" data-col="Black / White / Grey" data-desc="Complete 40 MM PPCP range: 90° Elbow DS (48g, 24pkt/ctn), 90° Elbow SS (39g, 27pkt/ctn), 45° Elbow (40g, 26pkt/ctn), Coupler (33g, 39pkt/ctn), Tee (72g, 12pkt/ctn), End Cap (6g, 106pkt/ctn). All 10pcs/packet."><div class="pc-vis"><img src="IMAGES/product/10.png" alt="PP Full 40 MM Range" loading="lazy"/></div><div class="pc-body"><span class="pc-cat" style="color:var(--teal);">PP Fittings</span><div class="pc-name">Full 40 MM PP Range</div><div class="pc-desc">90° elbows DS/SS, 45° elbow, coupler, tee, end cap in 40 MM PPCP.</div><div class="pc-specs"><span class="spec">40 MM</span><span class="spec">PPCP</span><span class="spec">10pcs/pkt</span></div></div><div class="pc-foot"><span class="pc-weight">6–72g</span><span class="pc-learn" style="color:var(--teal);">Details <i class="bi bi-arrow-right"></i></span></div></div>
+      <div class="pc rv" data-c="floor" data-name="Square Drain Grating" data-cat="Floor Trap" data-img="IMAGES/product/11.png" data-weight="360g" data-size="130×130 MM (91 MM hole)" data-std="Bathroom Floor Water Drain Grating" data-mat="Stainless Steel" data-col="Matt / Glossy / PVD Gold / PVD Rose / PVD Black" data-desc="Premium bathroom floor drain grating. 91 MM hole, 130×130 MM top plate, 150×150 MM base. Five finishes: Matt, Glossy, PVD Gold, PVD Rose and PVD Black. Multiple decorative grate patterns available."><div class="pc-vis"><img src="IMAGES/product/11.png" alt="Square Drain Grating" loading="lazy"/></div><div class="pc-body"><span class="pc-cat" style="color:var(--gold);">Floor Trap</span><div class="pc-name">Square Drain Grating 130×130</div><div class="pc-desc">91 MM hole · 130×130 top · 150×150 base. Matt, Glossy, PVD Gold, Rose &amp; Black.</div><div class="pc-specs"><span class="spec">130×130 MM</span><span class="spec">91 MM Hole</span><span class="spec">5 Finishes</span></div></div><div class="pc-foot"><span class="pc-weight">360g</span><span class="pc-learn" style="color:var(--gold);">Details <i class="bi bi-arrow-right"></i></span></div></div>
+      <div class="pc rv" data-c="floor" data-name="Linear Drain Grating 1–4 ft" data-cat="Floor Trap" data-img="IMAGES/product/12.png" data-weight="800–2750g" data-size="1 Feet to 4 Feet" data-std="Bathroom Floor Water Drain Grating" data-mat="Stainless Steel" data-col="Matt / Glossy / PVD Gold / PVD Rose / PVD Black" data-desc="Elongated linear channel drain gratings from 1 to 4 feet. All 5 premium finishes available. Includes 150g floor drain cap. Ideal for wet rooms, walk-in showers and luxury bathroom renovations."><div class="pc-vis"><img src="IMAGES/product/12.png" alt="Linear Drain Grating 1–4 ft" loading="lazy"/></div><div class="pc-body"><span class="pc-cat" style="color:var(--gold);">Floor Trap</span><div class="pc-name">Linear Drain Grating 1–4 ft</div><div class="pc-desc">1–4 ft elongated channel drains in all 5 premium PVD and metal finishes.</div><div class="pc-specs"><span class="spec">1ft–4ft</span><span class="spec">5 Finishes</span><span class="spec">+150g cap</span></div></div><div class="pc-foot"><span class="pc-weight">800–2750g</span><span class="pc-learn" style="color:var(--gold);">Details <i class="bi bi-arrow-right"></i></span></div></div>
+      <div class="pc rv" data-c="shower" data-name="Shower &amp; Douche Plates" data-cat="Shower Plates" data-img="IMAGES/product/13.png" data-weight="300–400g" data-size="4 MM plate" data-std="Branded (Tiler's Choice) / Without Brand" data-mat="MS / Stainless Steel" data-col="Chrome / Black" data-desc="MS Shower Plate (Chrome, 400g, 48 small cartons), MS Douche Plate (4MM, Chrome, 300g, 96 small cartons), Big S/S Plate and Small S/S Duche Plate (4MM, Chrome &amp; Black). Branded Tiler's Choice or without brand for private label."><div class="pc-vis"><img src="IMAGES/product/13.png" alt="Shower &amp; Douche Plates" loading="lazy"/></div><div class="pc-body"><span class="pc-cat" style="color:var(--indigo);">Shower Plates</span><div class="pc-name">Metal Shower &amp; Douche Plates</div><div class="pc-desc">MS &amp; SS shower/douche plates. Chrome &amp; Black. Tiler's Choice brand available.</div><div class="pc-specs"><span class="spec">MS / SS</span><span class="spec">Chrome / Black</span><span class="spec">4 MM</span></div></div><div class="pc-foot"><span class="pc-weight">300–400g</span><span class="pc-learn">Details <i class="bi bi-arrow-right"></i></span></div></div>
+      <div class="pc rv" data-c="waste" data-name="Waste Pipe Adapters" data-cat="Waste Adapter" data-img="IMAGES/product/14a.png" data-weight="139–179g" data-size="32 MM / 40 MM" data-std="PVC Standard" data-mat="PVC" data-col="Black / Brown" data-desc="UG and Soil Waste Adapters. Single side: 110×32MM (139g, 90/ctn), 110×40MM (143g, 90/ctn), 110×32×32MM (173g, 70/ctn), 110×32×40MM (174g, 70/ctn). Double side: 110×40×40MM (179g, 70/ctn). Black or Brown PVC."><div class="pc-vis"><img src="IMAGES/product/14a.png" alt="Waste Pipe Adapters" loading="lazy"/></div><div class="pc-body"><span class="pc-cat" style="color:var(--indigo);">Waste Adapter</span><div class="pc-name">UG &amp; Soil Waste Adapters</div><div class="pc-desc">Single and double side adapters in 32 MM and 40 MM. Black and brown PVC.</div><div class="pc-specs"><span class="spec">32/40 MM</span><span class="spec">PVC</span><span class="spec">Black/Brown</span></div></div><div class="pc-foot"><span class="pc-weight">139–179g</span><span class="pc-learn">Details <i class="bi bi-arrow-right"></i></span></div></div>
+      <div class="pc rv" data-c="pushfit" data-name="Pushfit Superseal Tube Support" data-cat="Pushfit Items" data-img="IMAGES/product/15.png" data-weight="2–5g" data-size="15 MM / 22 MM" data-std="PP Standard" data-mat="Polypropylene (PP)" data-col="Black / Brown (O-Ring: Black / Blue)" data-desc="Superseal tube support pushfit fittings with rubber O-rings. 15 MM: 2g, 50pcs/pkt, 180 packets/carton. 22 MM: 5g, 25pcs/pkt, 160 packets/carton. Body Black or Brown. O-ring Black or Blue."><div class="pc-vis"><img src="IMAGES/product/15.png" alt="Pushfit Superseal Tube Support" loading="lazy"/></div><div class="pc-body"><span class="pc-cat" style="color:var(--teal);">Pushfit Items</span><div class="pc-name">Superseal Tube Support 15 &amp; 22 MM</div><div class="pc-desc">PP pushfit with rubber O-rings. 15 MM (50pcs/pkt) and 22 MM (25pcs/pkt).</div><div class="pc-specs"><span class="spec">15/22 MM</span><span class="spec">PP</span><span class="spec">+O-Ring</span></div></div><div class="pc-foot"><span class="pc-weight">2–5g</span><span class="pc-learn" style="color:var(--teal);">Details <i class="bi bi-arrow-right"></i></span></div></div>
+    </div>
+  </div>
+</section>
+<div style="background:linear-gradient(135deg,var(--indigo),var(--indigo2));padding:72px 0;">
+  <div class="wrap" style="text-align:center;">
+    <h2 style="font-family:var(--fp);font-size:2.2rem;font-weight:700;color:#fff;margin-bottom:10px;">Not sure which product fits your project?</h2>
+    <p style="font-size:.95rem;color:rgba(255,255,255,.7);max-width:440px;margin:0 auto 32px;line-height:1.8;">Describe your needs — our AI assistant will recommend the right product, size and standard in seconds.</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+      <a href="ai.html" class="btn btn-white"><i class="bi bi-stars"></i> Open AI Assistant</a>
+      <a href="contact.html" class="btn btn-outline-white"><i class="bi bi-send"></i> Request a Quote</a>
+    </div>
+  </div>
+</div>
+<footer><div class="wrap"><div class="foot-grid"><div><div class="foot-logo-name">Aayuki<span>.</span></div><div class="foot-logo-tag">Export</div><div class="foot-desc">Premium plumbing fittings from Rajkot, India.</div><div style="margin-top:20px;"><a href="#" class="soc"><i class="bi bi-linkedin"></i></a><a href="#" class="soc"><i class="bi bi-whatsapp"></i></a><a href="mailto:info@duraexport.uk" class="soc"><i class="bi bi-envelope"></i></a></div></div><div><h6>Navigate</h6><a href="index.html" class="flink">Home</a><a href="about.html" class="flink">About</a><a href="products.html" class="flink">Products</a><a href="gallery.html" class="flink">Gallery</a><a href="reviews.html" class="flink">Reviews</a><a href="contact.html" class="flink">Contact</a><a href="ai.html" class="flink">AI Assistant</a></div><div><h6>Categories</h6><a href="#" onclick="filterTo('swr');return false;" class="flink">SWR Series</a><a href="#" onclick="filterTo('pp');return false;" class="flink">PP Fittings</a><a href="#" onclick="filterTo('floor');return false;" class="flink">Floor Traps</a><a href="#" onclick="filterTo('shower');return false;" class="flink">Shower Plates</a><a href="#" onclick="filterTo('waste');return false;" class="flink">Waste Adapters</a></div><div><h6>Contact</h6><div style="font-size:.83rem;color:rgba(255,255,255,.45);line-height:1.9;">Plot No. 14, Vavdi Industrial Area,<br>Rajkot – 360004, Gujarat<br><br><a href="tel:+919825045496" style="color:#818cf8;">+91 98250 45496</a><br>info@duraexport.uk</div></div></div><div class="foot-bottom"><div class="foot-copy">© 2025 AAYUKI EXPORT</div><div class="foot-copy">BS EN 1329-1 · BS4514 · ISO3633 · SN4</div></div></div></footer>
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <div style="padding:24px 24px 0;display:flex;justify-content:space-between;align-items:center;">
+      <span id="m-cat" style="font-family:var(--fm);font-size:.58rem;letter-spacing:2px;text-transform:uppercase;color:var(--indigo);"></span>
+      <button class="modal-close" onclick="closeModal()"><i class="bi bi-x-lg"></i></button>
+    </div>
+    <div style="padding:16px 24px 32px;">
+      <div style="height:200px;overflow:hidden;border-radius:10px;margin-bottom:18px;"><img id="m-img" src="" alt="" style="width:100%;height:100%;object-fit:cover;"/></div>
+      <div style="font-family:var(--fp);font-size:1.6rem;font-weight:700;margin-bottom:10px;color:var(--text);" id="m-name"></div>
+      <p style="font-size:.88rem;color:var(--muted);line-height:1.8;margin-bottom:20px;" id="m-desc"></p>
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:22px;" id="m-specs"></div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="contact.html" class="btn btn-p"><i class="bi bi-send"></i> Request Quote</a>
+        <a href="ai.html" class="btn btn-g"><i class="bi bi-stars"></i> Ask AI</a>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="shared.js"></script>
+<script>
+initAll('products.html');
+document.querySelectorAll('.fb').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.fb').forEach(b=>b.classList.remove('on'));
+    btn.classList.add('on');const f=btn.dataset.f;let n=0;
+    document.querySelectorAll('.pc').forEach(c=>{const s=f==='all'||c.dataset.c===f;if(s){c.style.display='';setTimeout(()=>{c.style.opacity='1';c.style.transform='';},10);n++;}else{c.style.opacity='0';c.style.transform='scale(.94)';setTimeout(()=>c.style.display='none',300);}});
+    setTimeout(()=>document.getElementById('showing').textContent=n,310);
+  });
+});
+function filterTo(f){document.querySelector(`.fb[data-f="${f}"]`).click();window.scrollTo({top:400,behavior:'smooth'});}
+document.querySelectorAll('.pc').forEach(c=>{
+  c.addEventListener('click',()=>{
+    document.getElementById('m-img').src=c.dataset.img;
+    document.getElementById('m-img').alt=c.dataset.name;
+    document.getElementById('m-cat').textContent=c.dataset.cat;
+    document.getElementById('m-name').textContent=c.dataset.name;
+    document.getElementById('m-desc').textContent=c.dataset.desc;
+    document.getElementById('m-specs').innerHTML=`<div class="ms"><div class="ms-label">Size</div><div class="ms-val">${c.dataset.size}</div></div><div class="ms"><div class="ms-label">Material</div><div class="ms-val">${c.dataset.mat}</div></div><div class="ms"><div class="ms-label">Weight</div><div class="ms-val">${c.dataset.weight}</div></div><div class="ms"><div class="ms-label">Colour</div><div class="ms-val">${c.dataset.col}</div></div><div class="ms" style="grid-column:span 2"><div class="ms-label">Standards</div><div class="ms-val">${c.dataset.std}</div></div>`;
+    document.getElementById('modal').classList.add('open');
+  });
+});
+function closeModal(){document.getElementById('modal').classList.remove('open');}
+document.getElementById('modal').addEventListener('click',e=>{if(e.target===document.getElementById('modal'))closeModal();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+</script>
+</body></html>
