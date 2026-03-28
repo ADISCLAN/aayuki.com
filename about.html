@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0"/>
 <title>About Us — Aayuki Export</title>
 <link rel="stylesheet" href="style.css"/>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet"/>
 <style>
 /* STORY */
-.story-split{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;}
-.story-visual{background:linear-gradient(145deg,var(--indigo),var(--indigo2));border-radius:20px;padding:56px 48px;position:relative;overflow:hidden;box-shadow:var(--sh-xl);}
-.story-visual::before{content:'25+';position:absolute;bottom:-30px;right:-20px;font-family:var(--fp);font-size:12rem;font-weight:700;color:rgba(255,255,255,.07);line-height:1;pointer-events:none;}
+.story-split{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;max-width:100%;overflow:hidden;}
+.story-visual{background:linear-gradient(145deg,var(--indigo),var(--indigo2));border-radius:20px;padding:56px 48px;position:relative;overflow:hidden;box-shadow:var(--sh-xl);max-width:100%;box-sizing:border-box;}
+.story-visual::before{content:'25+';position:absolute;bottom:-30px;right:-20px;font-family:var(--fp);font-size:12rem;font-weight:700;color:rgba(255,255,255,.07);line-height:1;pointer-events:none;overflow:hidden;}
 .sv-year{font-family:var(--fp);font-size:5rem;font-weight:700;color:#fff;line-height:1;}
 .sv-label{font-family:var(--fm);font-size:.62rem;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,.55);margin-top:6px;}
 .sv-desc{font-size:.9rem;color:rgba(255,255,255,.7);line-height:1.8;margin:24px 0;}
@@ -88,48 +88,52 @@
 .sbc-lbl{font-family:var(--fm);font-size:.58rem;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.55);margin-top:6px;}
 
 @media(max-width:960px){
-  .story-split{grid-template-columns:1fr;}
-  .story-visual{padding:40px 32px;}
+  .story-split{grid-template-columns:1fr;width:100%;max-width:100%;}
+  .story-visual{padding:40px 32px;width:100%;max-width:100%;box-sizing:border-box;}
   .sv-year{font-size:3.5rem;}
   .story-visual::before{font-size:8rem;bottom:-20px;right:-10px;}
-  .vm-grid{grid-template-columns:1fr;}
-  .vm-card{padding:36px 28px;}
-  .values-grid{grid-template-columns:1fr 1fr;}
-  .team-grid{grid-template-columns:1fr 1fr;}
-  .process{grid-template-columns:1fr 1fr;gap:28px;}
+  .vm-grid{grid-template-columns:1fr;width:100%;}
+  .vm-card{padding:36px 28px;width:100%;box-sizing:border-box;}
+  .values-grid{grid-template-columns:1fr 1fr;width:100%;}
+  .team-grid{grid-template-columns:1fr 1fr;width:100%;}
+  .process{grid-template-columns:1fr 1fr;gap:28px;width:100%;}
   .process::before{display:none;}
-  .stat-band-grid{grid-template-columns:1fr 1fr;gap:24px;}
+  .stat-band-grid{grid-template-columns:1fr 1fr;gap:24px;width:100%;}
   .sbc{border:none;padding:0 12px;}
   .sbc-num{font-size:2.2rem;}
-  div[style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important;gap:40px!important;}
+  div[style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important;gap:40px!important;width:100%!important;box-sizing:border-box!important;}
 }
 @media(max-width:600px){
-  .story-visual{padding:32px 24px;}
+  body{overflow-x:hidden;max-width:100vw;}
+  .story-split{width:100%;max-width:100%;overflow:hidden;}
+  .story-visual{padding:32px 24px;width:100%;max-width:100%;box-sizing:border-box;}
   .sv-year{font-size:3rem;}
   .sv-desc{font-size:.85rem;}
-  .sv-stats{grid-template-columns:1fr;gap:12px;}
-  .vm-card{padding:28px 20px;}
+  .sv-stats{grid-template-columns:1fr;gap:12px;width:100%;}
+  .vm-card{padding:28px 20px;width:100%;box-sizing:border-box;}
   .vm-icon{width:60px;height:60px;margin-bottom:16px;}
   .vm-title{font-size:1.3rem;}
   .vm-body{font-size:.87rem;}
   .vm-pt{font-size:.82rem;}
-  .values-grid{grid-template-columns:1fr;}
-  .val-card{padding:28px 20px;}
+  .values-grid{grid-template-columns:1fr;width:100%;}
+  .val-card{padding:28px 20px;width:100%;box-sizing:border-box;}
   .val-icon{width:70px;height:70px;}
-  .team-grid{grid-template-columns:1fr;}
-  .team-card{padding:28px 20px;}
+  .team-grid{grid-template-columns:1fr;width:100%;}
+  .team-card{padding:28px 20px;width:100%;box-sizing:border-box;}
   .team-av{width:100px;height:100px;}
-  .process{grid-template-columns:1fr;}
+  .process{grid-template-columns:1fr;width:100%;}
   .pstep{padding:0 10px;}
   .pstep-circle{width:48px;height:48px;font-size:.9rem;}
-  .stat-band{padding:40px 0;}
-  .stat-band-grid{grid-template-columns:1fr;gap:20px;}
+  .stat-band{padding:40px 0;width:100%;overflow:hidden;}
+  .stat-band-grid{grid-template-columns:1fr;gap:20px;width:100%;}
   .sbc-num{font-size:2rem;}
   .tl{padding-left:24px;}
   .tl::before{left:6px;}
   .tl-item::before{left:-21px;width:9px;height:9px;}
-  div[style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important;gap:32px!important;}
-  div[style*="display:flex;gap:20px"]{flex-direction:column;gap:16px;}
+  div[style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important;gap:32px!important;width:100%!important;box-sizing:border-box!important;}
+  div[style*="display:flex;gap:20px"]{flex-direction:column;gap:16px;width:100%!important;box-sizing:border-box!important;}
+  .wrap{max-width:100%;overflow:hidden;box-sizing:border-box;}
+  .sec{overflow:hidden;max-width:100vw;}
 }
 </style>
 </head>
